@@ -36,7 +36,7 @@
 								<li><a href="#fakelink">Change password</a></li>								
 								<li class="divider"></li>
 								<li><a href="lock-screen.html">Lock screen</a></li>
-								<li><a href="login.html">Log out</a></li>
+								<li><a href="<?php echo base_url('auth/login') ?>">Log out</a></li>
 							  </ul>
 							</li>
 						</ul>

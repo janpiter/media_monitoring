@@ -133,7 +133,8 @@ class Auth extends CI_Controller
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
 			$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|xss_clean|matches[password]');
 
-			$captcha_registration	= $this->config->item('captcha_registration', 'tank_auth');
+			// $captcha_registration	= $this->config->item('captcha_registration', 'tank_auth');
+			$captcha_registration	= '';
 			$use_recaptcha			= $this->config->item('use_recaptcha', 'tank_auth');
 			if ($captcha_registration) {
 				if ($use_recaptcha) {
