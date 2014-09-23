@@ -43,7 +43,7 @@
 
 $default_controller = "frontpage";
 $language_alias = array('en','id');
-$controller_exceptions = array('backend');
+$controller_exceptions = array('backend', 'auth/*');
 
 $route['default_controller'] = $default_controller;
 $route["^(".implode('|', $language_alias).")/(".implode('|', $controller_exceptions).")(.*)"] = '$2';
