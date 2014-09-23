@@ -43,14 +43,16 @@
 
 $default_controller = "frontpage";
 $language_alias = array('en','id');
-$controller_exceptions = array('backend', 'auth/*');
+$controller_exceptions = array('backend', 'auth/*', 'solr');
 
 $route['default_controller'] = $default_controller;
 $route["^(".implode('|', $language_alias).")/(".implode('|', $controller_exceptions).")(.*)"] = '$2';
 $route["^(".implode('|', $language_alias).")?/(.*)"] = $default_controller.'/$2';
 $route["^((?!\b".implode('\b|\b', $controller_exceptions)."\b).*)$"] = $default_controller.'/$1';
+
 foreach($language_alias as $language)
 	$route[$language] = $default_controller.'/index';
+
 $route['404_override'] = '404.php';
 
 
