@@ -60,10 +60,9 @@ class Solr_url {
         if(count($input) > 0){            
             foreach ($input as $key => $value) {
                 $subQuery[] = $key . ":" . $value;
-            }
-            
-            $query .= implode($subQuery, "+".$operator."+");            
+            }                      
         }
+        $query .= implode($subQuery, "+".$operator."+");
 
         $this->q = $query;
     }

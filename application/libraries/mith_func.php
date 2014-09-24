@@ -18,6 +18,10 @@ class Mith_func {
         return $mk." ".number_format($string, $nol, ",", ".");
     }
     
+    function number_format($string){
+        return number_format($string, 0, ",", ".");
+    }
+    
     function uploaded_image($name, $path, $width=220, $height=220) {
 //        $this->debugVar($_FILES[$name]);
         if (isset($_FILES[$name]['name']) && $_FILES[$name]['name'] != '') {
@@ -193,8 +197,12 @@ class Mith_func {
         return $cuaca;
     }
 
-    function time_elapsed_string($ptime) {
-        $etime = time() - strtotime($ptime);
+    function time_elapsed_string($ptime, $solrFormat=False) {
+        if($solrFormat) {
+            $ptime = substr(str_replace("T", " ", $ptime), 0, -4);
+        }
+        
+        $etime = time() - strtotime($ptime);        
         if ($etime < 1) {
             return 'just now';
         }
