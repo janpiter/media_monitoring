@@ -28,7 +28,7 @@
 							<li class="dropdown">
 							  <a href="#fakelink" class="dropdown-toggle" data-toggle="dropdown">
 								<img src="<?php echo base_url('assets/img/avatar/avatar-1.jpg') ?>" class="avatar img-circle" alt="Avatar">
-								Hi, <strong>Rizal Ramadhany</strong>&nbsp;&nbsp;
+								Hi, <strong><?php echo $this->tank_auth->get_personname(); ?></strong>&nbsp;&nbsp;
 								<span class="fa fa-caret-down"></span>
 							  </a>
 							  <ul class="dropdown-menu square primary margin-list-rounded with-triangle">
@@ -36,7 +36,7 @@
 								<li><a href="#fakelink">Change password</a></li>								
 								<li class="divider"></li>
 								<li><a href="lock-screen.html">Lock screen</a></li>
-								<li><a href="<?php echo base_url('auth/login') ?>">Log out</a></li>
+								<li><a href="<?php echo base_url('auth/logout') ?>">Log out</a></li>
 							  </ul>
 							</li>
 						</ul>

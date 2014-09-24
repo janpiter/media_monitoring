@@ -1,100 +1,53 @@
-<?php
-if ($use_username) {
-	$username = array(
-		'name'	=> 'username',
-		'id'	=> 'username',
-		'value' => set_value('username'),
-		'maxlength'	=> $this->config->item('username_max_length', 'tank_auth'),
-		'size'	=> 30,
-	);
-}
-$email = array(
-	'name'	=> 'email',
-	'id'	=> 'email',
-	'value'	=> set_value('email'),
-	'maxlength'	=> 80,
-	'size'	=> 30,
-);
-$password = array(
-	'name'	=> 'password',
-	'id'	=> 'password',
-	'value' => set_value('password'),
-	'maxlength'	=> $this->config->item('password_max_length', 'tank_auth'),
-	'size'	=> 30,
-);
-$confirm_password = array(
-	'name'	=> 'confirm_password',
-	'id'	=> 'confirm_password',
-	'value' => set_value('confirm_password'),
-	'maxlength'	=> $this->config->item('password_max_length', 'tank_auth'),
-	'size'	=> 30,
-);
-$captcha = array(
-	'name'	=> 'captcha',
-	'id'	=> 'captcha',
-	'maxlength'	=> 8,
-);
-?>
-<?php echo form_open($this->uri->uri_string()); ?>
-<table>
-	<?php if ($use_username) { ?>
-	<tr>
-		<td><?php echo form_label('Username', $username['id']); ?></td>
-		<td><?php echo form_input($username); ?></td>
-		<td style="color: red;"><?php echo form_error($username['name']); ?><?php echo isset($errors[$username['name']])?$errors[$username['name']]:''; ?></td>
-	</tr>
-	<?php } ?>
-	<tr>
-		<td><?php echo form_label('Email Address', $email['id']); ?></td>
-		<td><?php echo form_input($email); ?></td>
-		<td style="color: red;"><?php echo form_error($email['name']); ?><?php echo isset($errors[$email['name']])?$errors[$email['name']]:''; ?></td>
-	</tr>
-	<tr>
-		<td><?php echo form_label('Password', $password['id']); ?></td>
-		<td><?php echo form_password($password); ?></td>
-		<td style="color: red;"><?php echo form_error($password['name']); ?></td>
-	</tr>
-	<tr>
-		<td><?php echo form_label('Confirm Password', $confirm_password['id']); ?></td>
-		<td><?php echo form_password($confirm_password); ?></td>
-		<td style="color: red;"><?php echo form_error($confirm_password['name']); ?></td>
-	</tr>
+<body class="login tooltips">
+	
+	<div class="login-header text-center">
+		<!-- <img src="<?php echo base_url('assets/img/logo-login.png') ?>" class="logo" alt="Logo"> -->
+		<i class="fa fa-line-chart"></i> <strong>MIS</strong> IRC
+	</div>
 
-	<?php if ($captcha_registration) {
-		if ($use_recaptcha) { ?>
-	<tr>
-		<td colspan="2">
-			<div id="recaptcha_image"></div>
-		</td>
-		<td>
-			<a href="javascript:Recaptcha.reload()">Get another CAPTCHA</a>
-			<div class="recaptcha_only_if_image"><a href="javascript:Recaptcha.switch_type('audio')">Get an audio CAPTCHA</a></div>
-			<div class="recaptcha_only_if_audio"><a href="javascript:Recaptcha.switch_type('image')">Get an image CAPTCHA</a></div>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<div class="recaptcha_only_if_image">Enter the words above</div>
-			<div class="recaptcha_only_if_audio">Enter the numbers you hear</div>
-		</td>
-		<td><input type="text" id="recaptcha_response_field" name="recaptcha_response_field" /></td>
-		<td style="color: red;"><?php echo form_error('recaptcha_response_field'); ?></td>
-		<?php echo $recaptcha_html; ?>
-	</tr>
-	<?php } else { ?>
-	<tr>
-		<td colspan="3">
-			<p>Enter the code exactly as it appears:</p>
-			<?php echo $captcha_html; ?>
-		</td>
-	</tr>
-	<tr>
-		<td><?php echo form_label('Confirmation Code', $captcha['id']); ?></td>
-		<td><?php echo form_input($captcha); ?></td>
-		<td style="color: red;"><?php echo form_error($captcha['name']); ?></td>
-	</tr>
-	<?php }
-	} ?>
-</table>
-<?php echo form_submit('register', 'Register'); ?>
-<?php echo form_close(); ?>
+	<div class="login-wrapper">
+		<form role="form" action="<?php echo base_url('auth/register') ?>" method="POST">
+			<div class="form-group has-feedback lg left-feedback no-label">
+			  <input type="text" name="personname" class="form-control no-border input-lg rounded" placeholder="Full name" autofocus="">
+			  <span class="fa fa-male form-control-feedback"></span>
+			</div>
+			<div class="form-group has-feedback lg left-feedback no-label">
+			  <input type="text" name="username" class="form-control no-border input-lg rounded" placeholder="Choose username">
+			  <span class="fa fa-user form-control-feedback"></span>
+			</div>
+			<div class="form-group has-feedback lg left-feedback no-label">
+			  <input type="email" name="email" class="form-control no-border input-lg rounded" placeholder="Enter email">
+			  <span class="fa fa-envelope form-control-feedback"></span>
+			</div>
+			<div class="form-group has-feedback lg left-feedback no-label">
+			  <input type="password" name="password" class="form-control no-border input-lg rounded" placeholder="Enter password">
+			  <span class="fa fa-lock form-control-feedback"></span>
+			</div>
+			<div class="form-group has-feedback lg left-feedback no-label">
+			  <input type="password" name="confirm_password" class="form-control no-border input-lg rounded" placeholder="re-enter password">
+			  <span class="fa fa-unlock form-control-feedback"></span>
+			</div>
+			<!-- <div class="form-group has-feedback lg left-feedback no-label"> -->
+			<div class="form-group has-feedback lg left-feedback">
+				<label>Role</label>
+				<select class="form-control no-border input-lg rounded" tabindex="2">
+					<option value=""></option>
+					<option value="1">Super admin</option>
+					<option value="2">Admin</option>
+					<option value="4">Guest</option>
+					<!-- <option value="3">Afghanistan</option> -->
+				</select>
+			  	<span class="fa fa-edit form-control-feedback"></span>
+			</div>
+			<!-- <div class="form-group">
+			  <div class="checkbox">
+				<label class="inline-popups">
+				  <div class="icheckbox_flat-yellow" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" class="i-yellow-flat" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div> I accept <a href="#text-popup" data-effect="mfp-zoom-in">Terms and conditions</a>
+				</label>
+			  </div>
+			</div> -->
+			<div class="form-group">
+				<button type="submit" name="register" class="btn btn-warning btn-lg btn-perspective btn-block">REGISTER</button>
+			</div>
+		</form>
+	</div>

@@ -149,6 +149,15 @@ class Tank_auth
 		return $this->ci->session->userdata('username');
 	}
 
+	function get_personname()
+	{
+		// return $this->ci->session->userdata('personname');
+		if ($user = $this->ci->users->get_person_name($this->get_user_id())) {
+			return $user->name;
+		}
+		return NULL;
+	}
+
 	/**
 	 * Create new user on the site and return some data about it:
 	 * user_id, username, password, email, new_email_key (if any).
@@ -159,7 +168,7 @@ class Tank_auth
 	 * @param	bool
 	 * @return	array
 	 */
-	function create_user($username, $email, $password, $email_activation)
+	function create_user($username, $email, $password, $name, $email_activation)
 	{
 		if ((strlen($username) > 0) AND !$this->ci->users->is_username_available($username)) {
 			$this->error = array('username' => 'auth_username_in_use');
@@ -178,7 +187,9 @@ class Tank_auth
 				'username'	=> $username,
 				'password'	=> $hashed_password,
 				'email'		=> $email,
+				'name'		=> $name,
 				'last_ip'	=> $this->ci->input->ip_address(),
+				'activated'	=> 1
 			);
 
 			if ($email_activation) {

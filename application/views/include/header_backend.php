@@ -42,6 +42,7 @@
 		<link href="<?php echo base_url('assets/css/font-awesome.min.css') ?>" rel="stylesheet">
 		<link href="<?php echo base_url('assets/css/style.css') ?>" rel="stylesheet">
 		<link href="<?php echo base_url('assets/css/style-responsive.css') ?>" rel="stylesheet">
+		<link href="<?php echo base_url('assets/css/custom.css') ?>" rel="stylesheet">
  
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -49,5 +50,3 @@
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 	</head>
- 
-	<body class="tooltips">

@@ -5,15 +5,26 @@ if (!defined('BASEPATH'))
 
 
 class Backend extends CI_Controller {
-    # default view
-    
-    function __construct() {		
-        parent::__construct();
-        
+
+	function __construct()
+	{
+		parent::__construct();
+
         $this->load->model('solr_model','',TRUE);           
-    }
-        
+		$this->load->helper(array('form', 'url'));
+		$this->load->library('form_validation');
+		$this->load->library('security');
+		// $this->load->library('tank_auth');
+		$this->load->library('tank_auth_groups','','tank_auth');
+		$this->lang->load('tank_auth');
+	}
+
+    # default view        
     public function index() {
+    	if (!$this->tank_auth->is_logged_in()) {
+			redirect('/auth/login/');
+		}
+		
         $newsToday = $this->solr_model->getNewsToday();
         
         $data['total_news'] = $this->mith_func->number_format($newsToday['total']);

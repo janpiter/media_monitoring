@@ -2,6 +2,37 @@
  * All your custom CSS should go into this file
  */
 
-body {
+.login-body {
    padding-top: 15px;
+   background-color: #E8E9EE;
+}
+
+.login-header {
+	font-size: 40px;
+	height: 60px !important;
+}
+
+.login-wrapper {
+	margin: 75px auto 0 !important;
+}
+
+.btn-info-login.btn-perspective, .btn-info-login.btn-perspective:hover {
+	-webkit-box-shadow: 0px 3px 0px #2C3439;
+	-moz-box-shadow: 0px 3px 0px #2C3439;
+	box-shadow: 0px 3px 0px #2C3439;
+	color: #fff;
+}
+
+.btn-info-login  {
+	background-color: #3f4549;
+	border-color: #3f4549;
+}
+
+.btn-info-login:hover {
+	background-color: #34393d;
+	border-color: #34393d;
+}
+
+.login-label {
+	color: #888 !important;
 }
