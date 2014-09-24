@@ -48,7 +48,6 @@ BEGIN PAGE
 
                 </div><!-- /.col-sm-6 -->
                 <div class="col-lg-3">
-
                     <!-- BEGIN TODAY VISITOR TILES -->
                     <div class="panel panel-warning panel-square panel-no-border text-center">
                         <div class="panel-heading">
@@ -61,7 +60,6 @@ BEGIN PAGE
                         </div><!-- /.panel-body -->
                     </div><!-- /.panel panel-success panel-block-color -->
                     <!-- END TODAY VISITOR TILES -->
-
                 </div><!-- /.col-sm-6 -->
                 <div class="col-lg-6">
 
@@ -183,78 +181,18 @@ BEGIN PAGE
                     <div class="the-box no-border full">
                         <button class="btn btn-block btn-primary btn-square" id="w-newsticker-next"><i class="fa fa-chevron-up"></i></button>
                         <ul class="widget-newsticker media-list">
+                            <?php foreach ($data_news as $news) { ?>
                             <li class="media">
                                 <a class="pull-left" href="#fakelink">
-                                    <img class="media-object" src="<?php echo base_url('assets/img/photo/small/img-1.jpg') ?>" alt="Image">
+                                    <img class="media-object" src="<?php echo $news->url; ?>" alt="Image">
                                 </a>
                                 <div class="media-body">
-                                    <h4 class="media-heading"><a href="#fakelink">Duis autem vel eum iriure dolor in hendrerit in vulputate</a></h4>
-                                    <p class="text-muted"><small>Posted on August 17, 2014</small></p>
-                                    <p>
-                                        Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut...
-                                    </p>
+                                    <h4 class="media-heading"><a href="#fakelink"><?php echo $news->title; ?></a></h4>
+                                    <p class="text-muted"><small>Posted <?php echo $this->mith_func->time_elapsed_string($news->pubDate, TRUE); ?></small></p>
+                                    <p><?php echo $news->desc; ?></p>
                                 </div>
-                            </li>
-                            <li class="media">
-                                <a class="pull-left" href="#fakelink">
-                                    <img class="media-object" src="assets/img/photo/small/img-2.jpg" alt="Image">
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a href="#fakelink">Lorem ipsum dolor sit amet, consectetuer</a></h4>
-                                    <p class="text-muted"><small>Posted on August 17, 2014</small></p>
-                                    <p>
-                                        Ut wisi enim ad minim veniam, quis nostrud exerci tation...
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="media">
-                                <a class="pull-left" href="#fakelink">
-                                    <img class="media-object" src="assets/img/photo/small/img-3.jpg" alt="Image">
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a href="#fakelink">Ut wisi enim ad minim veniam</a></h4>
-                                    <p class="text-muted"><small>Posted on August 17, 2014</small></p>
-                                    <p>
-                                        Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper...
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="media">
-                                <a class="pull-left" href="#fakelink">
-                                    <img class="media-object" src="assets/img/photo/small/img-4.jpg" alt="Image">
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a href="#fakelink">Typi non habent</a></h4>
-                                    <p class="text-muted"><small>Posted on August 17, 2014</small></p>
-                                    <p>
-                                        Ut wisi enim ad minim veniam, quis nostrud exerci...
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="media">
-                                <a class="pull-left" href="#fakelink">
-                                    <img class="media-object" src="assets/img/photo/small/img-5.jpg" alt="Image">
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a href="#fakelink">Claritas est etiam processus</a></h4>
-                                    <p class="text-muted"><small>Posted on August 17, 2014</small></p>
-                                    <p>
-                                        Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit...
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="media">
-                                <a class="pull-left" href="#fakelink">
-                                    <img class="media-object" src="assets/img/photo/small/img-6.jpg" alt="Image">
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a href="#fakelink">Eodem modo typi, qui nunc nobis</a></h4>
-                                    <p class="text-muted"><small>Posted on August 17, 2014</small></p>
-                                    <p>
-                                        Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper...
-                                    </p>
-                                </div>
-                            </li>
+                            </li>                            
+                            <?php } ?>
                         </ul>
                         <button class="btn btn-block btn-primary btn-square" id="w-newsticker-prev"><i class="fa fa-chevron-down"></i></button>
                     </div><!-- /.the-box no-border -->

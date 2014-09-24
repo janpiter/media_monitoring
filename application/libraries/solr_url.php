@@ -87,18 +87,18 @@ class Solr_url {
      * $miniCount(optional) = least count of facet
      */
 
-    public function getFacet($facetInput, $miniCount='1', $offset=NULL, $limits=NULL) {
+    public function getFacet($facetInput, $minCount='1', $offset=NULL, $limit=NULL) {
         $facet = "&facet=true";
         foreach ($facetInput as $key => $value) {
             $facet .= "&facet.field=" . $value;
         }
-        $facet .= "&facet.mincount=" . $miniCount;
+        $facet .= "&facet.mincount=" . $minCount;
         
         if($offset) {
             $facet .= "&facet.offset=" . $offset;
         }
-        if($limits) {
-            $facet .= "&facet.limit=" . $limits;
+        if($limit) {
+            $facet .= "&facet.limit=" . $limit;
         }
         
         $this->facet = $facet;

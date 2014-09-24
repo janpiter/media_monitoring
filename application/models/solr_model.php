@@ -2,12 +2,12 @@
 
 class solr_model extends CI_Model {
 
-    function getNewsToday(){
+    function getDashboardData(){
         $solr_conf = $this->config->item('solr_news');
         
         $today = date("Ymd");
         $query = 'pub_day:'.$today;
-        $inputArr = array();
+        $inputArr = array('with_pic' => 1);
         $facetArr = array('pub_hour', 'media');
 
         //call methods  
@@ -17,7 +17,7 @@ class solr_model extends CI_Model {
         $this->solr_url->getFacet($facetArr, 1, NULL, 300);
         
         //create URL now!!
-        $url = $this->solr_url->echo_solr_url('json', "0", "1");        
+        $url = $this->solr_url->echo_solr_url('json', "0", "10");        
         
         //Parse json object
         $solr = solrResult_json_parser($url, $facetArr);
@@ -26,7 +26,7 @@ class solr_model extends CI_Model {
         $data['total'] = $solr['count'];
         
         //get results
-        $data['last_news'] = $solr['results'][0];//json object
+        $data['last_news'] = $solr['results'];//json object
         
         //get facet 
         $facet = $solr['facet'];//array()               
