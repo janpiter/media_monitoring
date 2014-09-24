@@ -1,7 +1,17 @@
 <?php
 
 class solr_model extends CI_Model {
+    
+    function __construct() {
+        parent::__construct();
 
+        $this->solr_conf = $this->config->item('solr_news');
+    }
+    
+    function getDocument() {
+        $this->
+    }
+    
     function getDashboardData(){
         $solr_conf = $this->config->item('solr_news');
         
