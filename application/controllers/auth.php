@@ -155,7 +155,10 @@ class Auth extends CI_Controller
 				}
 			}
 			$data['errors'] = array();
-
+			
+			print_r($data['errors']);
+			exit();
+			
 			$email_activation = $this->config->item('email_activation', 'tank_auth');
 
 			if ($this->form_validation->run()) {								// validation ok

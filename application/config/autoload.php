@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('session', 'pagination', 'mith_func', 'solr_url');
+$autoload['libraries'] = array('database', 'session', 'pagination', 'mith_func', 'solr_url');
 
 
 /*

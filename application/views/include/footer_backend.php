@@ -3,8 +3,7 @@
 		Placed at the end of the document so the pages load faster
 		===========================================================
 		-->
-		<!-- MAIN JAVASRCIPT (REQUIRED ALL PAGE)-->
-		<script src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>
+		<!-- MAIN JAVASRCIPT (REQUIRED ALL PAGE)-->		
 		<script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
 		<script src="<?php echo base_url('assets/plugins/retina/retina.min.js') ?>"></script>
 		<script src="<?php echo base_url('assets/plugins/nicescroll/jquery.nicescroll.js') ?>"></script>
