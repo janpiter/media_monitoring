@@ -23,13 +23,15 @@
 					</ol>
 					<!-- End breadcrumb -->
 					
-					<?php echo $msg;?>
+					<?php # echo $msg;?>
 					
 					<!-- BEGIN DATA TABLE -->
 					<div class="the-box">
-
+						
+						<?php if($this->tank_auth->is_admin()) {?>
 						<button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-success"><i class="fa fa-plus-circle"></i>&nbsp;Add Data</button>
 						<br/><br/>
+						<?php } ?>
 
 						<div class="table-responsive">
 						<table class="table table-striped table-hover" id="datatable-example">
@@ -54,10 +56,17 @@
 									<td><?php echo $u->email; ?></td>
 									<td><?php echo $u->last_login; ?></td>
 									<td class="text-right">
-										<button class="btn btn-primary btn-circle btn-outline" type="button"><i class="fa fa-lock"></i></button>
-										<button class="btn btn-success btn-circle btn-outline" type="button"><i class="fa fa-eye"></i></button>
-										<button class="btn btn-warning btn-circle btn-outline" type="button"><i class="fa fa-edit"></i></button>
-										<button class="btn btn-danger btn-circle btn-outline" type="button"><i class="fa fa-times"></i></button>
+										<div class="btn-group">
+											<button type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown">
+												<i class="fa fa-cogs"></i>
+											</button>
+											<ul class="dropdown-menu pull-right" role="menu">												
+												<li><a href="#fakelink">Edit</a></li>
+												<li><a href="#fakelink">Delete</a></li>
+												<li class="divider"></li>
+												<li><a href="#fakelink">Reset Password</a></li>
+											</ul>
+										</div>
 									</td>									
 								</tr>
 								<?php } ?>
@@ -83,7 +92,7 @@
 		<script type="text/javascript">
 		$(document).ready(function(){			
 			$(".tooltip-examples button").tooltip(); 
-			window.setTimeout(function() { $(".alert").alert('close'); }, 5000);
+			window.setTimeout(function() { $(".alert").alert('close'); }, 8000);
 		});
 		</script>
 		

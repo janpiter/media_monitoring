@@ -17,11 +17,9 @@ BEGIN PAGE
             <!-- Begin page heading -->
             <h1 class="page-heading">
                 DASHBOARD [UPDATED]
-                <div style="float: right;">
-                    <a href="<?php echo base_url("/backend"); ?>">
-                    <i class="fa fa-refresh"></i>
-                    <small>Refresh Data</small>
-                </a></div>
+				<div class="pull-right">
+					<button class="btn btn-primary active" onclick="<?php echo base_url("/backend/dashboard"); ?>"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+				</div>                
             </h1>
             <!-- End page heading -->
 
@@ -73,7 +71,7 @@ BEGIN PAGE
                     <!-- BEGIN WEATHER WIDGET 2 -->
                     <div class="panel panel-info panel-square panel-no-border">
                         <div class="panel-heading">
-                            <h3 class="panel-title white-text">YOGYAKARTA CITY, ID</h3>
+                            <h3 class="panel-title white-text">BANDUNG CITY, ID</h3>
                         </div>
                         <div class="panel-body bg-info">
                             <div class="row">
