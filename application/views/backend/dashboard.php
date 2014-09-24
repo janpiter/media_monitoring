@@ -15,7 +15,14 @@ BEGIN PAGE
         <div class="container-fluid">
 
             <!-- Begin page heading -->
-            <h1 class="page-heading">DASHBOARD [UPDATED] <small>Sub heading here</small></h1>
+            <h1 class="page-heading">
+                DASHBOARD [UPDATED]
+                <div style="float: right;">
+                    <a href="<?php echo base_url("/backend"); ?>">
+                    <i class="fa fa-refresh"></i>
+                    <small>Refresh Data</small>
+                </a></div>
+            </h1>
             <!-- End page heading -->
 
             <!-- BEGIN EXAMPLE ALERT -->
@@ -188,7 +195,7 @@ BEGIN PAGE
                                 </a>
                                 <div class="media-body">
                                     <h4 class="media-heading"><a href="#fakelink"><?php echo $news->title; ?></a></h4>
-                                    <p class="text-muted"><small>Posted <?php echo $this->mith_func->time_elapsed_string($news->pubDate, TRUE); ?></small></p>
+                                    <p class="text-muted"><small>Posted on <?php echo str_replace("+", " ", ucfirst($news->media)); ?>, <?php echo $this->mith_func->time_elapsed_string($news->pubDate, TRUE); ?></small></p>
                                     <p><?php echo $news->desc; ?></p>
                                 </div>
                             </li>                            

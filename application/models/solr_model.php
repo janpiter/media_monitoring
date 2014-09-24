@@ -8,7 +8,7 @@ class solr_model extends CI_Model {
         $today = date("Ymd");
         $query = 'pub_day:'.$today;
         $inputArr = array('with_pic' => 1);
-        $facetArr = array('pub_hour', 'media');
+        $facetArr = array('media');
 
         //call methods  
         $this->solr_url->get_base_url($solr_conf);
@@ -30,7 +30,6 @@ class solr_model extends CI_Model {
         
         //get facet 
         $facet = $solr['facet'];//array()               
-        $data['per_hour'] = $facet['pub_hour'];
         arsort($facet['media']);
         $data['per_media'] = $facet['media'];
         
