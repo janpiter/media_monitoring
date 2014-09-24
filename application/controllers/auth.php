@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Auth extends CI_Controller
+class auth extends CI_Controller
 {
 	function __construct()
 	{
@@ -31,7 +31,7 @@ class Auth extends CI_Controller
 	function login()
 	{
 		if ($this->tank_auth->is_logged_in()) {									// logged in
-			redirect('/backend');
+			redirect('/backend/dashboard');
 
 		} elseif ($this->tank_auth->is_logged_in(FALSE)) {						// logged in, not activated
 			redirect('/auth/send_again/');
@@ -73,7 +73,7 @@ class Auth extends CI_Controller
 						$this->form_validation->set_value('remember'),
 						$data['login_by_username'],
 						$data['login_by_email'])) {								// success
-						redirect('/backend');
+						redirect('/backend/dashboard');
 
 				} else {
 					$errors = $this->tank_auth->get_error_message();
@@ -123,7 +123,7 @@ class Auth extends CI_Controller
 	function register()
 	{
 		if ($this->tank_auth->is_logged_in() AND !$this->tank_auth->is_admin()) {	// logged in
-			redirect('/backend');
+			redirect('/backend/dashboard');
 
 		} elseif ($this->tank_auth->is_logged_in(FALSE)) {							// logged in, not activated
 			redirect('/auth/send_again/');

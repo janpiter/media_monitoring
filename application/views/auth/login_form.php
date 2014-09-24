@@ -1,9 +1,9 @@
 <body class="login-body">
-
+	<div class="background-image col-lg-12"></div>
 	<div class="login-header text-center">
 		<i class="fa fa-line-chart"></i> <strong>MIS</strong> IRC
 	</div>
-	<div class="login-wrapper">
+	<!-- <div class="login-wrapper">
 		<form role="form" action="<?php echo base_url('auth/login') ?>" method="POST">
 			<div class="form-group has-feedback lg left-feedback no-label">
 				<input type="text" name="login" class="form-control no-border input-lg rounded" placeholder="Username" autofocus="">
@@ -24,10 +24,10 @@
 				<button type="submit" name="submit" class="btn btn-info-login btn-lg btn-perspective btn-block"><i class="fa fa-sign-in"></i> LOGIN</button>
 			</div>
 		</form>
-	</div>
+	</div> -->
 
-	<!-- <div class="container">
-		<div class="the-box col-sm-4 col-sm-offset-4" style="margin-top: 75px">
+	<div class="container">
+		<div class="the-box-login col-sm-4 col-sm-offset-4">
 			<form role="form" action="<?php echo base_url('auth/login') ?>" method="POST">
 				<div class="row">
 					<div class="col-sm-12">
@@ -51,7 +51,7 @@
 				<button type="submit" name="submit" class="btn btn-info-login btn-lg btn-perspective btn-block" tabindex="4"><i class="fa fa-sign-in"></i> LOGIN</button>
 			</form>
 		</div>
-	</div> -->
+	</div>
 
 	
 
