@@ -3,28 +3,24 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Backend extends CI_Controller {
+class dashboard extends CI_Controller {
 
     function __construct() {
         parent::__construct();
 
         $this->load->model('solr_model', '', TRUE);
-		$this->load->model('users_management', '', TRUE);
-        $this->load->helper(array('form', 'url'));
-        $this->load->library('form_validation');
-        $this->load->library('security');
-        // $this->load->library('tank_auth');
         $this->load->library('tank_auth_groups', '', 'tank_auth');
         $this->lang->load('tank_auth');		
     }
 
     # default view
     public function index() {
-        $newsToday = $this->solr_model->getDashboardData();
         if (!$this->tank_auth->is_logged_in()) {
             redirect('/auth/login/');
         }
-
+        
+        $newsToday = $this->solr_model->getDashboardData();        
+        
         $data['total_news'] = $this->mith_func->number_format($newsToday['total']);
         $data['total_media'] = count($newsToday['per_media']);
         $data['top_media'] = "-";
@@ -47,16 +43,5 @@ class Backend extends CI_Controller {
         $this->load->view('backend/dashboard', $data);
         $this->load->view('include/footer_backend');
     }
-
-    public function users() {
-				
-		$users = $this->users_management->get_all();
-		
-		$data['users'] = $users;
-		
-        $this->load->view('include/header_backend');
-        $this->load->view('backend/users', $data);
-        $this->load->view('include/footer_backend');
-    }
-
+    
 }
