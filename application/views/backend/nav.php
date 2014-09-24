@@ -11,22 +11,30 @@
 					<li>
 						<a href="<?php echo base_url('backend/users') ?>">
 							<i class="fa fa-users icon-sidebar"></i>
-							User Management
-							<span class="label label-danger span-sidebar">NEW</span>
+							User Management							
 						</a>
 					</li>
 					<li>
-						<a href="front-end.html">
+						<a href="#fakelink">
 							<i class="fa fa-database icon-sidebar"></i>
-							Data Management
-							<span class="label label-success span-sidebar">NEW</span>
-						</a>
+							<i class="fa fa-angle-right chevron-icon-sidebar"></i>
+							Data Management							
+							</a>
+						<ul class="submenu">
+							<li><a href="#fakelink">News</a></li>
+							<li><a href="#fakelink">Topic</a></li>
+							<li><a href="#fakelink">Sub Topic</a></li>
+							<li><a href="#fakelink">Person</a></li>
+							<li><a href="#fakelink">Person Title</a></li>
+							<li><a href="#fakelink">Organization</a></li>
+							<li><a href="#fakelink">Programs</a></li>
+							<li><a href="#fakelink">Publisher</a></li>							
+						</ul>
 					</li>
 					<li>
 						<a href="front-end.html">
 							<i class="fa fa-newspaper-o icon-sidebar"></i>
-							News Scoring
-							<span class="label label-warning span-sidebar">NEW</span>
+							News Scoring							
 						</a>
 					</li>
 					<!-- <li>
