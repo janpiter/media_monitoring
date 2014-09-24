@@ -55,7 +55,7 @@ class Solr_url {
         $query = '?q=';
         
         $subQuery = array();
-        $subQuery[] = $basicQuery;
+        $subQuery[] = str_replace(" ", "+", $basicQuery);
         
         if(count($input) > 0){            
             foreach ($input as $key => $value) {
@@ -75,8 +75,8 @@ class Solr_url {
      * return string
      */
 
-    public function getSort($sort, $order) {
-        $this->sort = "&sort=" . $sort . "+" . $order;
+    public function getSort($sort) {
+        $this->sort = "&sort=" . str_replace(" ", "+", $sort);
     }
 
     /*
@@ -87,18 +87,14 @@ class Solr_url {
      * $miniCount(optional) = least count of facet
      */
 
-    public function getFacet($facetInput, $minCount='1', $offset=NULL, $limit=NULL) {
+    public function getFacet($facetInput, $adds) {
         $facet = "&facet=true";
         foreach ($facetInput as $key => $value) {
             $facet .= "&facet.field=" . $value;
         }
-        $facet .= "&facet.mincount=" . $minCount;
         
-        if($offset) {
-            $facet .= "&facet.offset=" . $offset;
-        }
-        if($limit) {
-            $facet .= "&facet.limit=" . $limit;
+        foreach ($adds as $key => $value) {
+            $facet .= "&".$key."=" . str_replace(" ", "+", $value);
         }
         
         $this->facet = $facet;
@@ -126,7 +122,7 @@ class Solr_url {
      * $limit: optional
      */
 
-    public function echo_solr_url($format, $offset = "0", $limits = "10") {
+    public function generate_solr_url($format, $offset = 0, $limits = 10) {
         if (isset($this->sort)) {
             $sort_url = $this->sort;
         } else {

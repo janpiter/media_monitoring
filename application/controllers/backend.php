@@ -17,8 +17,7 @@ class Backend extends CI_Controller {
         $this->lang->load('tank_auth');
     }
 
-    # default view        
-
+    # default view
     public function index() {
         $newsToday = $this->solr_model->getDashboardData();
         if (!$this->tank_auth->is_logged_in()) {
