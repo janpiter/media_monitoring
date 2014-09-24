@@ -189,7 +189,7 @@ class auth extends CI_Controller
 						unset($data['password']); // Clear password (just for any case)
 
 						if ($this->tank_auth->is_admin()) {
-							redirect('/backend/users');
+							redirect('/backend/user');
 						}
 						$this->_show_message($this->lang->line('auth_message_registration_completed_2').' '.anchor('/auth/login/', 'Login'));
 					}

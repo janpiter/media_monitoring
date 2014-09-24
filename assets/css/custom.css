@@ -3,33 +3,60 @@
  */
 
 .background-image {
-	/*padding-top: 15px;*/
-	/*background-color: #E8E9EE;*/
-	position: fixed;
-	left: 0;
-	right: 0;
-	z-index: -1;
+	background-color: #E8E9EE;
+}
 
-	display: block;
-	background-image: url('../img/login-bg.png') no-repeat center center fixed; 
-	-webkit-background-size: cover;
+.login-container {
+	background-color: #fff;
+	margin-top:45px;
+	padding-left: 0;
+	padding-right: 0;
+	-webkit-box-shadow: 1px 1px 5px 0px rgba(50, 50, 50, 0.2);
+	-moz-box-shadow:    1px 1px 5px 0px rgba(50, 50, 50, 0.2);
+	box-shadow:         1px 1px 5px 0px rgba(50, 50, 50, 0.2);
+}
+
+.background-login-header {
+	background-color: #fff;
+	background-image: url('../img/Industry_Solutions.jpg'); 
+	background-position: center;
+	/*-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
-	background-size: cover;
+	background-size: cover;*/
+	-webkit-background-size: contain;
+	-moz-background-size: contain;
+	-o-background-size: contain;
+	background-size: contain;
+	background-repeat: no-repeat;
+	padding-left: 10px !important; 
+	padding-top: 0 !important; 
+	padding-bottom: 0 !important; 
+	margin-left: 0 !important;
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+	height: 350px;
+	color: #fff;
+	font-size: 50px;
+	font-weight: 500;
+}
 
-	/*width: 1024px;*/
-	/*height: 800px;*/
+.background-login-header div {
+	padding-top: 100px;
+	vertical-align: middle;
+	text-shadow: 2px 2px 6px rgba(0, 0, 0, 1);
+}
 
-	-webkit-filter: blur(5px);
-	-moz-filter: blur(5px);
-	-o-filter: blur(5px);
-	-ms-filter: blur(5px);
-	filter: blur(5px);
+.background-login-header strong {
+	font-size: 26px;
+	font-weight: 400;
 }
 
 .login-header {
 	font-size: 40px;
 	height: 60px !important;
+	background-color: #3f4549;
+	color: #fff;
 }
 
 .login-wrapper {
@@ -54,25 +81,12 @@
 }
 
 .login-label {
-	/*color: #888 !important;*/
 	color: #3f4549;
 }
 
-.the-box-login {
-	padding: 15px;
-	margin-top: 75px;
+.the-box {
+	margin-top: 25px;
 	margin-bottom: 30px;
-	position: relative;
-    /*top: 0px;*/
-    /*left: 0px;*/
-    /*background-color: #000;*/
-    background-color: rgba(0, 0, 0, 0.1);
-    /*color: white;*/
-    /*font-size: 20pt;*/
-    /*height: 200px; */
-    /*width: 200px;*/
-    /*opacity:0.4;*/
-    /*filter:alpha(opacity=40); */
 }
 
 /* Buttons */
