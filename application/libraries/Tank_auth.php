@@ -68,10 +68,14 @@ class Tank_auth
 						$this->error = array('banned' => $user->ban_reason);
 
 					} else {
+						// $user = $this->ci->users->get_user_by_id($this->get_user_id());
+						// $this->ci->session->set_userdata(array('group_id'	=> $user->group_id));
+
 						$this->ci->session->set_userdata(array(
 								'user_id'	=> $user->id,
 								'username'	=> $user->username,
 								'status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
+								'group_id'	=> $user->group_id
 						));
 
 						if ($user->activated == 0) {							// fail - not activated
@@ -113,7 +117,7 @@ class Tank_auth
 		$this->delete_autologin();
 
 		// See http://codeigniter.com/forums/viewreply/662369/ as the reason for the next line
-		$this->ci->session->set_userdata(array('user_id' => '', 'username' => '', 'status' => ''));
+		$this->ci->session->set_userdata(array('user_id' => '', 'username' => '', 'status' => '', 'group_id' => ''));
 
 		$this->ci->session->sess_destroy();
 	}
@@ -168,7 +172,7 @@ class Tank_auth
 	 * @param	bool
 	 * @return	array
 	 */
-	function create_user($username, $email, $password, $name, $email_activation)
+	function create_user($username, $email, $password, $name, $level, $email_activation)
 	{
 		if ((strlen($username) > 0) AND !$this->ci->users->is_username_available($username)) {
 			$this->error = array('username' => 'auth_username_in_use');
@@ -189,7 +193,7 @@ class Tank_auth
 				'email'		=> $email,
 				'name'		=> $name,
 				'last_ip'	=> $this->ci->input->ip_address(),
-				'activated'	=> 1
+				'group_id'	=> $level
 			);
 
 			if ($email_activation) {
@@ -579,6 +583,7 @@ class Tank_auth
 								'user_id'	=> $user->id,
 								'username'	=> $user->username,
 								'status'	=> STATUS_ACTIVATED,
+								'group_id'	=> $user->group_id
 						));
 
 						// Renew users cookie to prevent it from expiring

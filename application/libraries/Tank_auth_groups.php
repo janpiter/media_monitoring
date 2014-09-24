@@ -33,32 +33,40 @@ class Tank_auth_groups extends Tank_auth {
     /**
      * Check if logged in user is an admin
      *
-     * @return	bool
+     * @return  bool
+     */
+    function is_super_admin()
+    {
+        return $this->ci->session->userdata('group_id') === '1';
+    }
+
+    /**
+     * Check if logged in user is an admin
+     *
+     * @return  bool
      */
     function is_admin()
     {
-		return $this->ci->session->userdata('group_id') === '100';
+        return $this->ci->session->userdata('group_id') === '2';
     }
-    
-    /**
-     * Login user on the site. Return TRUE if login is successful
-     * (user exists and activated, password is correct), otherwise FALSE.
-     *
-     * @param	string	(username or email or both depending on settings in config file)
-     * @param	string
-     * @param	bool
-     * @return	bool
-     */
-    function login($login, $password, $remember, $login_by_username, $login_by_email)
-    {
-		$loggedIn = parent::login($login, $password, $remember, $login_by_username, $login_by_email);
 
-		if($loggedIn) 
-		{
-			$user = $this->ci->users->get_user_by_id($this->get_user_id());
-			$this->ci->session->set_userdata(array('group_id'	=> $user->group_id));
-		}
-				
-		return $loggedIn;
+    /**
+     * Check if logged in user is an admin
+     *
+     * @return  bool
+     */
+    function is_manager()
+    {
+        return $this->ci->session->userdata('group_id') === '3';
+    }
+
+    /**
+     * Check if logged in user is an admin
+     *
+     * @return  bool
+     */
+    function is_operator()
+    {
+        return $this->ci->session->userdata('group_id') === '4';
     }
 }
