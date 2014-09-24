@@ -122,13 +122,13 @@ class Auth extends CI_Controller
 	 */
 	function register()
 	{
-		if ($this->tank_auth->is_logged_in()) {									// logged in
+		if ($this->tank_auth->is_logged_in() AND !$this->tank_auth->is_admin()) {	// logged in
 			redirect('/backend');
 
-		} elseif ($this->tank_auth->is_logged_in(FALSE)) {						// logged in, not activated
+		} elseif ($this->tank_auth->is_logged_in(FALSE)) {							// logged in, not activated
 			redirect('/auth/send_again/');
 
-		} elseif (!$this->config->item('allow_registration', 'tank_auth')) {	// registration is off
+		} elseif (!$this->config->item('allow_registration', 'tank_auth')) {		// registration is off
 			$this->_show_message($this->lang->line('auth_message_registration_disabled'));
 
 		} else {
@@ -156,8 +156,8 @@ class Auth extends CI_Controller
 			}
 			$data['errors'] = array();
 			
-			print_r($data['errors']);
-			exit();
+			// print_r($data['errors']);
+			// exit();
 			
 			$email_activation = $this->config->item('email_activation', 'tank_auth');
 
@@ -188,6 +188,9 @@ class Auth extends CI_Controller
 						}
 						unset($data['password']); // Clear password (just for any case)
 
+						if ($this->tank_auth->is_admin()) {
+							redirect('/backend/users');
+						}
 						$this->_show_message($this->lang->line('auth_message_registration_completed_2').' '.anchor('/auth/login/', 'Login'));
 					}
 				} else {
