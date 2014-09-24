@@ -27,6 +27,7 @@ class user extends CI_Controller {
         $users = $this->users_management->get_all();
 
         $data['users'] = $users;
+		$data['msg'] = $this->mith_func->build_message($type='success', $msg='Data successfuly insert');
 
         $this->load->view('include/header_backend');
         $this->load->view('backend/users', $data);

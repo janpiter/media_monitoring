@@ -2,7 +2,7 @@
 			<div class="sidebar-left sidebar-nicescroller">
 				<ul class="sidebar-menu">
 					<li>
-						<a href="<?php echo base_url('backend') ?>">
+						<a href="<?php echo base_url('backend/dashboard') ?>">
 							<i class="fa fa-dashboard icon-sidebar"></i>
 							Dashboard
 							<!-- <span class="label label-success span-sidebar">UPDATED</span> -->

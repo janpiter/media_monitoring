@@ -23,6 +23,8 @@
 					</ol>
 					<!-- End breadcrumb -->
 					
+					<?php echo $msg;?>
+					
 					<!-- BEGIN DATA TABLE -->
 					<div class="the-box">
 
@@ -52,12 +54,10 @@
 									<td><?php echo $u->email; ?></td>
 									<td><?php echo $u->last_login; ?></td>
 									<td class="text-right">
-										<div class="tooltip-examples btn-group">
-											<button type="button" class="btn btn-xs btn-info" data-toggle="tooltip" data-placement="bottom" title="Reset Password"><i class="fa fa-lock"></i></button>
-											<button type="button" class="btn btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="View"><i class="fa fa-eye"></i></button>
-											<button type="button" class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fa fa-edit"></i></button>
-											<button type="button" class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="Remove"><i class="fa fa-times-circle"></i></button>
-										</div>
+										<button class="btn btn-primary btn-circle btn-outline" type="button"><i class="fa fa-lock"></i></button>
+										<button class="btn btn-success btn-circle btn-outline" type="button"><i class="fa fa-eye"></i></button>
+										<button class="btn btn-warning btn-circle btn-outline" type="button"><i class="fa fa-edit"></i></button>
+										<button class="btn btn-danger btn-circle btn-outline" type="button"><i class="fa fa-times"></i></button>
 									</td>									
 								</tr>
 								<?php } ?>
@@ -82,7 +82,8 @@
 		
 		<script type="text/javascript">
 		$(document).ready(function(){			
-			$(".tooltip-examples button").tooltip();   
+			$(".tooltip-examples button").tooltip(); 
+			window.setTimeout(function() { $(".alert").alert('close'); }, 5000);
 		});
 		</script>
 		

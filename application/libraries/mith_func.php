@@ -225,4 +225,14 @@ class Mith_func {
     }
     
     /** End Added by RR * */
+	
+	function build_message($type='info', $msg='') {
+		# a.ardiansyah
+		return '
+			<div class="alert alert-'.$type.' alert-bold-border square fade in alert-dismissable">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				'.$msg.'				
+			</div>
+		';
+	}
 }
