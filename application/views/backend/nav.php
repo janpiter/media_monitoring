@@ -12,7 +12,13 @@
             <li>
                 <a href="<?php echo base_url('backend/user') ?>">
                     <i class="fa fa-users icon-sidebar"></i>
-                    User Management							
+                    User Management                         
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo base_url('backend/log') ?>">
+                    <i class="fa fa-history icon-sidebar"></i>
+                    Activity Log						
                 </a>
             </li>
         <?php } ?>
@@ -40,8 +46,8 @@
                 News Scoring							
             </a>
         </li>				
-        <li class="static">SYSTEM SETTING</li>
-        <li class="text-content">
+        <li class="static">REPORTING</li>
+        <!-- <li class="text-content">
             <div class="switch">
                 <div class="onoffswitch blank">
                     <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="alertme" checked>
@@ -88,7 +94,7 @@
                 </div>
             </div>
             Remember this computer
-        </li>
+        </li> -->
     </ul>
 </div><!-- /.sidebar-left -->
 <!-- END SIDEBAR LEFT -->			

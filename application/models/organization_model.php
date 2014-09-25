@@ -7,8 +7,9 @@ class organization_model extends CI_Model {
     function __construct() {
         parent::__construct();
 
-        $ci =& get_instance();
-        $ci->load->model('logging_model');
+        $CI =& get_instance();
+        $CI->load->model('logging_model');
+        $this->log = $CI->logging_model;
     }
 
     function getList($where=array(), $start=0, $limit=0) {
@@ -39,18 +40,20 @@ class organization_model extends CI_Model {
     function insertOrganization($data) {
         $this->db->insert($this->table_name, $data);
         $last_id = $this->db->insert_id();
-        // $this->insert_log('insert', $table_name, $last_id);
+        $this->log->insertLog('input', $this->table_name, $last_id, $data);
         return $last_id;
     }
 
     function updateOrganization($data) {
         $this->db->where('organization_id', $data['organization_id']);
         $this->db->update($this->table_name, $data);        
+        $this->log->insertLog('update', $this->table_name, $data['organization_id'], $data);
     }
 
     function deleteOrganization($organization_id) {
         $this->db->where('organization_id', $organization_id);
         $this->db->delete($this->table_name);
+        $this->log->insertLog('delete', $this->table_name, $organization_id, '');
         
         $res = $this->db->_error_number();        
         return $res;
