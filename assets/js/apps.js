@@ -1350,4 +1350,7 @@ if ($('#realtime-chart-widget').length > 0){
 		}
 	});
 	
+	
+	window.setTimeout(function() { $(".alert").alert('close'); }, 8000);
+	
 });

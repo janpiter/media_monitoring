@@ -23,12 +23,14 @@
 					</ol>
 					<!-- End breadcrumb -->
 					
-					<?php # echo $msg;?>
+					<?php 
+						echo $this->session->flashdata('msg');						
+					?>
 					
 					<!-- BEGIN DATA TABLE -->
 					<div class="the-box">
 						
-						<?php if($this->tank_auth->is_admin()) {?>
+						<?php if($this->tank_auth->is_admin() or $this->tank_auth->is_super_admin()) {?>
 						<button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-success"><i class="fa fa-plus-circle"></i>&nbsp;Add Data</button>
 						<br/><br/>
 						<?php } ?>
@@ -48,7 +50,9 @@
 							<tbody>
 								<?php 
 								$no = 0;
-								foreach($users as $u) { ?>
+								foreach($users as $u) { 
+									if($u->group_id == 1){ continue; }
+								?>
 								<tr class="gradeA">
 									<td><?php echo ++$no; ?></td>
 									<td><?php echo $u->name; ?></td>
@@ -61,10 +65,10 @@
 												<i class="fa fa-cogs"></i>
 											</button>
 											<ul class="dropdown-menu pull-right" role="menu">												
-												<li><a href="#fakelink">Edit</a></li>
-												<li><a href="#fakelink">Delete</a></li>
+												<li><a href="#" class="edit-row" data-id="<?php echo $u->id; ?>">Edit</a></li>
+												<li><a href="#" class="delete-row" data-id="<?php echo $u->id; ?>">Delete</a></li>
 												<li class="divider"></li>
-												<li><a href="#fakelink">Reset Password</a></li>
+												<li><a href="#" class="reset-row" data-id="<?php echo $u->id; ?>">Reset Password</a></li>
 											</ul>
 										</div>
 									</td>									
@@ -87,21 +91,67 @@
 		<div id="back-top">
 			<a href="#top"><i class="fa fa-chevron-up"></i></a>
 		</div>
-		<!-- END BACK TO TOP -->
-		
-		<script type="text/javascript">
-		$(document).ready(function(){			
-			$(".tooltip-examples button").tooltip(); 
-			window.setTimeout(function() { $(".alert").alert('close'); }, 8000);
-		});
-		</script>
-		
+		<!-- END BACK TO TOP -->		
 		
 		<!--
 		===========================================================
 		END PAGE
 		===========================================================
 		-->
+		
+		<script type="text/javascript">
+			$('.edit-row').click(function(e) {
+				$.ajax({
+					type: 'POST',
+					dataType : 'json',
+					url: '<?php echo base_url('/backend/user/get'); ?>',
+					data: 'id=' + $(this).data('id'),
+					success: function(response) {
+						console.log(response);								
+						$('input[id=edit_id]').val(response.id);
+						$('input[name=personname]').val(response.name);
+						$('input[name=username]').val(response.username);
+						$('input[name=email]').val(response.email);
+						$('select[name=user-level]').val(response.group_id);
+
+						$('.password').hide();
+						$('input[name=password]').prop('disabled',true);
+						$('.confirm_password').hide();
+						$('input[name=confirm_password]').prop('disabled',true);
+						
+						$('#myModal form').attr('action', '<?php echo base_url('/backend/user/edit') ?>'); //this fails silently
+						$('#myModal form').get(0).setAttribute('action', '<?php echo base_url('/backend/user/edit') ?>'); //this works
+						
+						$('#myModal').modal('show');
+					}
+				})
+			});
+			$('.reset-row').click(function(e) {
+				
+				$('input[id=edit_id]').val($(this).data('id'));
+				
+				$('.personname').hide();
+				$('input[name=personname]').prop('disabled',true);
+				$('.username').hide();
+				$('input[name=username]').prop('disabled',true);				
+				$('.email').hide();
+				$('input[name=email]').prop('disabled',true);
+				$('.user-level').hide();
+				$('select[name=user-level]').prop('disabled',true);
+				$('.confirm_password').hide();
+				$('input[name=confirm_password]').prop('disabled',true);	
+
+				$('#myModal form').attr('action', '<?php echo base_url('/backend/user/force_reset') ?>'); //this fails silently
+				$('#myModal form').get(0).setAttribute('action', '<?php echo base_url('/backend/user/force_reset') ?>'); //this works
+				
+				$('#myModal').modal('show');
+			});
+			
+			$('.delete-row').click(function(e) {
+				$('input[id=deleted_id]').val($(this).data('id'));
+				$('#delete').modal('show');
+			});
+		</script>
 
 
 		<!-- Modal -->
@@ -114,34 +164,34 @@
 					</div>
 					<form role="form" action="<?php echo base_url('auth/register') ?>" method="post">
 						<div class="modal-body">																			
-							<div class="form-group">
+							<div class="form-group personname">
 								<label>Full name</label>
-								<input type="text" name="personname" class="form-control has-feedback" autofocus />
+								<input type="text" name="personname" class="form-control has-feedback" autofocus required />
 								<!-- <span class="fa fa-male form-control-feedback"></span> -->				
 							</div>
-							<div class="form-group">
+							<div class="form-group username">
 								<label>Username</label>
-								<input type="username" name="username" class="form-control has-feedback">
+								<input type="username" name="username" class="form-control has-feedback" required />
 								<!-- <span class="fa fa-user form-control-feedback"></span> -->								
 							</div>
-							<div class="form-group">
+							<div class="form-group email">
 								<label>Email address</label>
-								<input type="email" name="email" class="form-control has-feedback">
+								<input type="email" name="email" class="form-control has-feedback" required />
 								<!-- <span class="fa fa-envelope form-control-feedback"></span> -->
 							</div>							
-							<div class="form-group">
+							<div class="form-group password">
 								<label>Password</label>
-								<input type="password" name="password" class="form-control has-feedback">
+								<input type="password" name="password" class="form-control has-feedback" required />
 								<!-- <span class="fa fa-lock form-control-feedback"></span> -->
 							</div>
-							<div class="form-group">
+							<div class="form-group confirm_password">
 								<label>Retype Password</label>
-								<input type="password" name="confirm_password" class="form-control has-feedback">
+								<input type="password" name="confirm_password" class="form-control has-feedback" required />
 								<!-- <span class="fa fa-unlock form-control-feedback"></span> -->
 							</div>
-							<div class="form-group">
+							<div class="form-group user-level">
 								<label>Permission</label>
-								<select name="user-level" class="form-control" tabindex="2">
+								<select name="user-level" class="form-control" tabindex="2" required >
 									<option value="" disabled selected>Choosen Role</option>
 									<option value="1">Super Administrator</option>
 									<option value="2">Administrator</option>
@@ -149,16 +199,10 @@
 									<option value="4">Operator</option>									
 								</select>
 								<!-- <span class="fa fa-cogs form-control-feedback"></span> -->
-							</div>							
-							<div class="form-group">
-								<div class="checkbox">
-									<label>
-										<input type="checkbox" class="i-grey-flat"> I've read and agree with <a href="#fakelink">Term and condition</a>
-									</label>
-								</div>
-							</div>				  						
+							</div>															  						
 						</div>
 						<div class="modal-footer">
+							<input type="hidden" id="edit_id" name="id" value="" />
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 							<button type="submit" name="register" class="btn btn-primary">Save changes</button>
 						</div>
@@ -166,3 +210,25 @@
 				</div>
 			</div>
 		</div>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="delete" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Delete User</h4>
+					</div>
+					<form action="<?php echo base_url('/backend/user/delete'); ?>" method="post">
+						<div class="modal-body">
+							<p>Are you sure you want to delete this data?</p>
+							<input type="hidden" name="id" id="deleted_id" value="" />
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+							<button type="submit" class="btn btn-primary" >Delete</button>
+						</div>
+					</form>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
