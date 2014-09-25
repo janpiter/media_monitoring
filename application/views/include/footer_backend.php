@@ -5,6 +5,7 @@
 		-->
 		<!-- MAIN JAVASRCIPT (REQUIRED ALL PAGE)-->		
 		<script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
+                <script src="<?php echo base_url('assets/js/bootstrap.file-input.js ') ?>"></script>                
 		<script src="<?php echo base_url('assets/plugins/retina/retina.min.js') ?>"></script>
 		<script src="<?php echo base_url('assets/plugins/nicescroll/jquery.nicescroll.js') ?>"></script>
 		<script src="<?php echo base_url('assets/plugins/slimscroll/jquery.slimscroll.min.js') ?>"></script>
