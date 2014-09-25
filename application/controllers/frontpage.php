@@ -3,9 +3,9 @@ class Frontpage extends Main_Controller {
 
    public function index()
 	{
-      $this->load->view('include/header');
-      $this->load->view('frontend/frontpage');
-      $this->load->view('include/footer');
+		$this->load->view('include/header_backend');
+		$this->load->view('frontend/frontpage');
+		$this->load->view('include/footer_backend');
 	}
 
 	public function dashboard() {
