@@ -1,4 +1,3 @@
-<!-- <body class="login-body background-image"> -->
 <body class="background-image">
 
 	<!-- <div class="login-header text-center">
@@ -36,9 +35,9 @@
 				</div>
 			</div>
 			<div class="col-sm-6">
-				<h1>Log In</h1>
+				<h1 class="text-center">Log In</h1>
 				<hr/>
-				<form role="form" action="<?php echo base_url('auth/login') ?>" method="POST">
+				<?php echo form_open($this->uri->uri_string()); ?>
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="form-group has-feedback left-feedback no-label">
@@ -59,7 +58,7 @@
 						</div>
 					</div>
 					<button type="submit" name="submit" class="btn btn-info-login btn-lg btn-perspective btn-block" tabindex="4"><i class="fa fa-sign-in"></i> Let me in</button>
-				</form>
+				<?php echo form_close(); ?>
 			</div>
 		</div>
 	</div>
