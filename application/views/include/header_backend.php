@@ -30,7 +30,7 @@
 		<link href="<?php echo base_url('assets/plugins/summernote/summernote.min.css') ?>" rel="stylesheet">
 		<link href="<?php echo base_url('assets/plugins/markdown/bootstrap-markdown.min.css') ?>" rel="stylesheet">
 		<link href="<?php echo base_url('assets/plugins/datatable/css/bootstrap.datatable.min.css') ?>" rel="stylesheet">
-		<link href="<?php echo base_url('assets/plugins/morris-chart/morris') ?>.min.css') ?>" rel="stylesheet">
+		<link href="<?php echo base_url('assets/plugins/morris-chart/morris.min.css') ?>" rel="stylesheet">
 		<link href="<?php echo base_url('assets/plugins/c3-chart/c3.min.css') ?>" rel="stylesheet">
 		<link href="<?php echo base_url('assets/plugins/slider/slider.min.css') ?>" rel="stylesheet">
 		<link href="<?php echo base_url('assets/plugins/salvattore/salvattore.css') ?>" rel="stylesheet">
