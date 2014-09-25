@@ -58,15 +58,15 @@
 									<td><?php echo $u->name; ?></td>
 									<td><?php echo $u->username; ?></td>
 									<td><?php echo $u->email; ?></td>
-									<td><?php echo $u->last_login; ?></td>
+									<td><?php echo $this->mith_func->time_elapsed_string($u->last_login); ?></td>
 									<td class="text-right">
 										<div class="btn-group">
 											<button type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown">
 												<i class="fa fa-cogs"></i>
 											</button>
 											<ul class="dropdown-menu pull-right" role="menu">												
-												<li><a href="#" class="edit-row" data-id="<?php echo $u->id; ?>">Edit</a></li>
-												<li><a href="#" class="delete-row" data-id="<?php echo $u->id; ?>">Delete</a></li>
+												<li><a href="#" class="edit-row" data-id="<?php echo $u->id; ?>">Edit Data</a></li>
+												<li><a href="#" class="delete-row" data-id="<?php echo $u->id; ?>">Delete Data</a></li>
 												<li class="divider"></li>
 												<li><a href="#" class="reset-row" data-id="<?php echo $u->id; ?>">Reset Password</a></li>
 											</ul>

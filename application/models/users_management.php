@@ -17,7 +17,7 @@ class Users_management extends CI_Model {
 	function get_all() {
 		$data = array();
 
-		$query = $this->db->query("select * from users u order by u.created asc");
+		$query = $this->db->query("select * from users u order by u.created desc");
 		
 		if ($query->num_rows() > 0) {
 			foreach ($query->result() as $row) {
