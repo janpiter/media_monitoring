@@ -9,7 +9,6 @@ class organization_model extends CI_Model {
 
         $ci =& get_instance();
         $ci->load->model('logging_model');
-        $this->insert_log = $ci->logging_model->insertLog();
     }
 
     function getList($where=array(), $start=0, $limit=0) {
@@ -40,7 +39,7 @@ class organization_model extends CI_Model {
     function insertOrganization($data) {
         $this->db->insert($this->table_name, $data);
         $last_id = $this->db->insert_id();
-        $this->insert_log('insert', $table_name, $last_id);
+        // $this->insert_log('insert', $table_name, $last_id);
         return $last_id;
     }
 
