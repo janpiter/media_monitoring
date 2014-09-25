@@ -50,7 +50,10 @@
                                 ?>
                                 <tr class="gradeA">
                                     <td><?php echo ++$no; ?></td>
-                                    <td><?php echo ucwords($obj->topic_name); ?></td>
+                                    <td>
+                                        <img alt="Avatar" class="ava img-circle" src="http://localhost/media_monitoring/assets/img/avatar/avatar-2.jpg">
+                                        <?php echo ucwords($obj->person_name); ?>
+                                    </td>
                                     <td class="text-right"><?php echo $this->mith_func->time_elapsed_string($obj->created); ?></td>
                                     <td class="text-center">
                                         <div class="btn-group">
@@ -60,13 +63,13 @@
                                             <ul class="dropdown-menu pull-right" role="menu">												
                                                 <li>
                                                     <a data-target="#edit" role="button" data-toggle="modal" title="Edit Data"
-                                                       id="edit_<?php echo $obj->topic_id; ?>"
-                                                       name="edit_<?php echo $obj->topic_id; ?>" href="">
+                                                       id="edit_<?php echo $obj->person_id; ?>"
+                                                       name="edit_<?php echo $obj->person_id; ?>" href="">
                                                         Edit Data</a>
                                                 </li>
                                                 <li>
                                                     <a data-target="#delete" role="button" data-toggle="modal" title="Delete Data"
-                                                       onclick="$('input[name=deleted_id]').val(<?php echo $obj->topic_id; ?>)"
+                                                       onclick="$('input[name=deleted_id]').val(<?php echo $obj->person_id; ?>)"
                                                        href="">
                                                         Delete Data</a>
                                                 </li>
@@ -97,11 +100,24 @@
         window.setTimeout(function () {
             $(".alert").alert('close');
         }, <?php echo $this->config->item('timeout_message'); ?>);
+        
+//        $('input[type=file]').bootstrapFileInput();
+//        $('.file-inputs').bootstrapFileInput();
 
         <?php foreach ($objList as $obj) { ?>
-            $("#edit_<?php echo $obj->topic_id; ?>").click(function () {
-                $('input[name=edit_topic_id]').val('<?php echo $obj->topic_id; ?>');
-                $('input[name=edit_topic_name]').val('<?php echo $obj->topic_name; ?>');
+            $("#edit_<?php echo $obj->person_id; ?>").click(function () {
+                $('input[name=edit_person_id]').val('<?php echo $obj->person_id; ?>');
+                $('input[name=edit_person_name]').val('<?php echo $obj->person_name; ?>');
+                
+                var img = '<?php echo $category->person_image; ?>';
+                var images = "<?php echo base_url('assets/img/no_image.png'); ?>";
+                if(img != ""){
+                    images = "<?php echo base_url('assets/data/person'); ?>";
+                    images = images +"/"+img;
+                }
+
+                var div = document.getElementById('edit_image_thumb');
+                div.innerHTML = '<img  src="'+images+'"/>';   
             });
         <?php } ?>
     });
@@ -110,16 +126,20 @@
 <!-- Modal -->
 <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form role="form" action="<?php echo base_url('backend/topic/add') ?>" method="post" id="form_add">
+        <form role="form" action="<?php echo base_url('backend/person/add') ?>" method="post" id="form_add" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Add New Topic</h4>
+                    <h4 class="modal-title" id="myModalLabel">Add New Person</h4>
                 </div>
                 <div class="modal-body">																			
                     <div class="form-group">
-                        <label>Topic name</label>
-                        <input type="text" id="topic_name" name="topic_name" class="form-control has-feedback" autofocus />
+                        <label>Person name</label>
+                        <input type="text" id="person_name" name="person_name" class="form-control has-feedback" autofocus />
+                    </div>
+                    <div class="form-group">
+                        <label>Person Image</label>
+                        <input id="image_pic" name="image_pic" type="file" data-bfi-disabled class="input-file">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -132,18 +152,23 @@
 </div>
 <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form role="form" action="<?php echo base_url('backend/topic/edit'); ?>" method="post" id="form_edit">
+        <form role="form" action="<?php echo base_url('backend/person/edit'); ?>" method="post" id="form_edit" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Edit Topic</h4>
+                    <h4 class="modal-title" id="myModalLabel">Edit Person</h4>
                 </div>
                 <div class="modal-body">                                
                     <div class="form-group">
-                        <label>Topic name</label>
-                        <input type="text" id="edit_topic_name" name="edit_topic_name" class="form-control has-feedback" autofocus />
-                        <input type="hidden" name="edit_topic_id" value="">
-                    </div>                    
+                        <label>Person name</label>
+                        <input type="text" id="edit_person_name" name="edit_person_name" class="form-control has-feedback" autofocus />
+                        <input type="hidden" name="edit_person_id" value="">
+                    </div>
+                    <div class="thumbnail" style="float: left;">
+                        <div class="thumb_edit" id="edit_image_thumb" name="edit_image_thumb"></div>
+                        <input id="edit_image_pic" name="edit_image_pic" type="file" data-bfi-disabled class="input-file" style="width: 100px;">                                        
+                    </div>                     
+                    <div style="clear: both;" /></div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
@@ -155,11 +180,11 @@
 </div>
 <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form role="form" action="<?php echo base_url('backend/topic/delete'); ?>" method="post" id="form_delete">
+        <form role="form" action="<?php echo base_url('backend/person/delete'); ?>" method="post" id="form_delete">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Delete Topic</h4>
+                    <h4 class="modal-title" id="myModalLabel">Delete Person</h4>
                 </div>
                 <div class="modal-body">
                     <p class="error-text"><?php echo $this->lang->line('MESSAGE_DELETE_CONFIRM'); ?></p>                                

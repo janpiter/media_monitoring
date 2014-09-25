@@ -22,12 +22,12 @@ class Mith_func {
         return number_format($string, 0, ",", ".");
     }
 
-    function uploaded_image($name, $path, $width = 220, $height = 220) {
+    function uploaded_image($name, $path, $width = 100, $height = 100) {
 //        $this->debugVar($_FILES[$name]);
         if (isset($_FILES[$name]['name']) && $_FILES[$name]['name'] != '') {
 
             $ext = substr(strrchr($_FILES[$name]["name"], '.'), 1);
-            $newfilename = "voltshoes_" . md5(date("YmdHis") . "_" . substr($_FILES[$name]["name"], 0, 3)) . "." . $ext;
+            $newfilename = "mis-irc_" . md5(date("YmdHis") . "_" . substr($_FILES[$name]["name"], 0, 3)) . "." . $ext;
 
             $config['upload_path'] = realpath(APPPATH . $path);
             $config['allowed_types'] = 'jpg|JPG|jpeg|JPEG|gif|png';
