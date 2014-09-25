@@ -33,15 +33,36 @@ class logging_model extends CI_Model {
     }
 
     function insertLog($activity, $table, $id) {
-        $log_data = array(
-            'activity'          => $activity,
-            'activity_detail'   => $data,
-            'user_id'           => 
-        );
-        $this->db->insert($this->table_name, $data);
-        $last_id = $this->db->insert_id();
+        /*
+        action: login, input, update, delete, deactivate
+        detail: table_name;id;value
+        */
+        // $this->db->select('*');
+        // $this->db->from($table);
         
-        return $last_id;
+        // foreach ($where as $key => $value) {
+        // $this->db->where($key, $value);
+        // }
+        
+        // $this->db->order_by("organization_name", "asc"); 
+        
+        // if($limit > 0){
+        //     $this->db->limit($limit, $start);
+        // }
+        
+        // $query = $this->db->get();
+        
+        // return $query->result();
+
+        // $log_data = array(
+        //     'activity'          => $activity,
+        //     'activity_detail'   => $data,
+        //     'user_id'           => 
+        // );
+        // $this->db->insert($this->table_name, $data);
+        // $last_id = $this->db->insert_id();
+        
+        return False;
     }
 
 }
