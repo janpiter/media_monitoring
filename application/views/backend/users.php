@@ -22,11 +22,7 @@
 						<li class="active">Users</li>
 					</ol>
 					<!-- End breadcrumb -->
-					
-					<?php 
-						echo $this->session->flashdata('msg');						
-					?>
-					
+										
 					<!-- BEGIN DATA TABLE -->
 					<div class="the-box">
 						
@@ -34,6 +30,8 @@
 						<button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-success"><i class="fa fa-plus-circle"></i>&nbsp;Add Data</button>
 						<br/><br/>
 						<?php } ?>
+						
+						<?php echo $this->session->flashdata('msg'); ?>
 
 						<div class="table-responsive">
 						<table class="table table-striped table-hover" id="datatable-example">

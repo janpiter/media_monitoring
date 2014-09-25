@@ -87,6 +87,7 @@ $config['login_attempt_expire'] = 60*60*24;
 */
 $config['autologin_cookie_name'] = 'autologin';
 $config['autologin_cookie_life'] = 60*60*24*31*2;
+$config['timeout'] = 60*60*1;
 
 /*
 |--------------------------------------------------------------------------
