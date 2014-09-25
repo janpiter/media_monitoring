@@ -149,14 +149,14 @@ class person extends CI_Controller {
     }
     
     protected function validate($edit="") {
-        $id = "";
-        if($edit != "") $id = $this->input->post($edit.'id');
+        $id = NULL;
+        if($edit != "") $id = $this->input->post($edit.'person_id');
         
         if (strlen($this->input->post($edit.'person_name')) < 3) {
             $this->error['person_name'] = 'Person Name must be at least 3 characters in length.';
         }
         
-        if($this->person_model->isDuplicate($this->input->post($edit.'person_name'))){
+        if($this->person_model->isDuplicate($this->input->post($edit.'person_name'), $id)){
             $this->error['duplicate'] = 'Data already exist.';
         }
         

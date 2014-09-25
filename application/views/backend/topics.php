@@ -34,7 +34,7 @@
                 <?php } ?>
                 <!-- END MESSAGE -->
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover" id="datatable-example">
+                    <table class="table table-striped table-hover" id="datatable-topics">
                         <thead class="the-box dark full">
                             <tr>
                                 <th>#</th>
@@ -93,6 +93,15 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        $('#datatable-topics').dataTable({
+            "columns": [
+                null,
+                null,
+                null,                
+                {"orderable": false}
+            ]
+        });
+        
         $(".tooltip-examples button").tooltip();
         window.setTimeout(function () {
             $(".alert").alert('close');

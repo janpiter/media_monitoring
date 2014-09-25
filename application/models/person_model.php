@@ -49,9 +49,11 @@ class person_model extends CI_Model {
         return $res;
     }
         
-    function isDuplicate($name) {
+    function isDuplicate($name, $id=NULL) {
+        if($id) $this->db->where('person_id <>', $id);
+        
         $this->db->where('person_name', $name);
-        $this->db->from($this->table_name);        
+        $this->db->from($this->table_name);
         $res = $this->db->count_all_results();
 
         if($res > 0)  return TRUE;

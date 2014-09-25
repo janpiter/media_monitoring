@@ -34,7 +34,7 @@
                 <?php } ?>
                 <!-- END MESSAGE -->
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover" id="datatable-example">
+                    <table class="table table-striped table-hover" id="datatable-persons">
                         <thead class="the-box dark full">
                             <tr>
                                 <th>#</th>
@@ -51,7 +51,7 @@
                                 <tr class="gradeA">
                                     <td><?php echo ++$no; ?></td>
                                     <td>
-                                        <img alt="Avatar" class="ava img-circle" src="http://localhost/media_monitoring/assets/img/avatar/avatar-2.jpg">
+                                        <img alt="Avatar" class="ava img-circle" src="<?php echo base_url('assets/data/persons/'.$obj->person_image); ?>">
                                         <?php echo ucwords($obj->person_name); ?>
                                     </td>
                                     <td class="text-right"><?php echo $this->mith_func->time_elapsed_string($obj->created); ?></td>
@@ -96,6 +96,15 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        $('#datatable-persons').dataTable({
+            "columns": [
+                null,
+                null,
+                null,                
+                {"orderable": false}
+            ]
+        });
+        
         $(".tooltip-examples button").tooltip();
         window.setTimeout(function () {
             $(".alert").alert('close');
@@ -109,10 +118,10 @@
                 $('input[name=edit_person_id]').val('<?php echo $obj->person_id; ?>');
                 $('input[name=edit_person_name]').val('<?php echo $obj->person_name; ?>');
                 
-                var img = '<?php echo $category->person_image; ?>';
+                var img = '<?php echo $obj->person_image; ?>';
                 var images = "<?php echo base_url('assets/img/no_image.png'); ?>";
                 if(img != ""){
-                    images = "<?php echo base_url('assets/data/person'); ?>";
+                    images = "<?php echo base_url('assets/data/persons'); ?>";
                     images = images +"/"+img;
                 }
 
@@ -165,10 +174,10 @@
                         <input type="hidden" name="edit_person_id" value="">
                     </div>
                     <div class="thumbnail" style="float: left;">
-                        <div class="thumb_edit" id="edit_image_thumb" name="edit_image_thumb"></div>
-                        <input id="edit_image_pic" name="edit_image_pic" type="file" data-bfi-disabled class="input-file" style="width: 100px;">                                        
+                        <div class="thumb_edit" id="edit_image_thumb" name="edit_image_thumb"></div>                        
                     </div>                     
                     <div style="clear: both;" /></div>
+                    <input id="edit_image_pic" name="edit_image_pic" type="file" data-bfi-disabled class="input-file">
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
