@@ -392,5 +392,13 @@ function __autoload($class) {
     }
 }
 
+/**
+ * CONFIG ADD BY mithrizal
+ */
+$config['timeout_message'] = 30000;
+/**
+ * END CONFIG ADD BY mithrizal
+ */
+
 /* End of file config.php */
 /* Location: ./application/config/config.php */

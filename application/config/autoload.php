@@ -52,7 +52,8 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database', 'session', 'pagination', 'mith_func', 'solr_url');
+$autoload['libraries'] = array('database', 'session', 'pagination', 'mith_func', 
+    'solr_url', 'form_validation', 'security');
 
 
 /*
@@ -64,7 +65,7 @@ $autoload['libraries'] = array('database', 'session', 'pagination', 'mith_func',
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url', 'solr_parser_helper');
+$autoload['helper'] = array('url', 'form', 'solr_parser_helper');
 
 
 /*

@@ -9,9 +9,7 @@ class user extends CI_Controller {
         parent::__construct();
 
         $this->load->model('users_management', '', TRUE);
-        $this->load->helper(array('form', 'url'));
-        $this->load->library('form_validation');
-        $this->load->library('security');
+
         // $this->load->library('tank_auth');
         $this->load->library('tank_auth_groups', '', 'tank_auth');
         $this->lang->load('tank_auth');
@@ -23,11 +21,11 @@ class user extends CI_Controller {
         if (!$this->tank_auth->is_logged_in()) {
             redirect('/auth/login/');
         }
-        
+
         $users = $this->users_management->get_all();
 
         $data['users'] = $users;
-		$data['msg'] = $this->mith_func->build_message($type='success', $msg='Data successfuly insert');
+        $data['msg'] = $this->mith_func->build_message($type = 'success', $msg = 'Data successfuly insert');
 
         $this->load->view('include/header_backend');
         $this->load->view('backend/users', $data);

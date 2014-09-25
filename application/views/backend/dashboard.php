@@ -17,9 +17,11 @@ BEGIN PAGE
             <!-- Begin page heading -->
             <h1 class="page-heading">
                 DASHBOARD [UPDATED]
-				<div class="pull-right">
-					<button class="btn btn-primary active" onclick="<?php echo base_url("/backend/dashboard"); ?>"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
-				</div>                
+                <div class="pull-right" style="text-transform: none;">
+                    <a class="btn btn-primary active" href="<?php echo base_url("/backend/dashboard"); ?>">
+                        <i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh
+                    </a>
+                </div>                
             </h1>
             <!-- End page heading -->
 
@@ -46,7 +48,7 @@ BEGIN PAGE
                         <div class="panel-body">
                             <h1 class="bolded tiles-number text-danger"><?php echo $total_media; ?></h1>
                             <p class="text-muted"><small>TOP MEDIA <strong><?php echo $top_media; ?></strong></small></p>
-                            <p class="text-muted"><small>TOTAL REACH <strong><?php echo $top_percent."%"; ?></strong></small></p>
+                            <p class="text-muted"><small>TOTAL REACH <strong><?php echo $top_percent . "%"; ?></strong></small></p>
                         </div><!-- /.panel-body -->
                     </div><!-- /.panel panel-success panel-block-color -->
                     <!-- END TODAY VISITOR TILES -->
@@ -187,16 +189,16 @@ BEGIN PAGE
                         <button class="btn btn-block btn-primary btn-square" id="w-newsticker-next"><i class="fa fa-chevron-up"></i></button>
                         <ul class="widget-newsticker media-list">
                             <?php foreach ($data_news as $news) { ?>
-                            <li class="media">
-                                <a class="pull-left" href="#fakelink">
-                                    <img class="media-object" src="<?php echo $news->url; ?>" alt="Image">
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a href="#fakelink"><?php echo $news->title; ?></a></h4>
-                                    <p class="text-muted"><small>Posted on <?php echo str_replace("+", " ", ucfirst($news->media)); ?>, <?php echo $this->mith_func->time_elapsed_string($news->pubDate, TRUE); ?></small></p>
-                                    <p><?php echo $news->desc; ?></p>
-                                </div>
-                            </li>                            
+                                <li class="media">
+                                    <a class="pull-left" href="#fakelink">
+                                        <img class="media-object" src="<?php echo $news->url; ?>" alt="Image">
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading"><a href="#fakelink"><?php echo $news->title; ?></a></h4>
+                                        <p class="text-muted"><small>Posted on <?php echo str_replace("+", " ", ucfirst($news->media)); ?>, <?php echo $this->mith_func->time_elapsed_string($news->pubDate, TRUE); ?></small></p>
+                                        <p><?php echo $news->desc; ?></p>
+                                    </div>
+                                </li>                            
                             <?php } ?>
                         </ul>
                         <button class="btn btn-block btn-primary btn-square" id="w-newsticker-prev"><i class="fa fa-chevron-down"></i></button>

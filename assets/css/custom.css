@@ -3,90 +3,91 @@
  */
 
 .background-image {
-	background-color: #E8E9EE;
+    background-color: #E8E9EE;
 }
 
 .login-container {
-	background-color: #fff;
-	margin-top:45px;
-	padding-left: 0;
-	padding-right: 0;
-	-webkit-box-shadow: 1px 1px 5px 0px rgba(50, 50, 50, 0.2);
-	-moz-box-shadow:    1px 1px 5px 0px rgba(50, 50, 50, 0.2);
-	box-shadow:         1px 1px 5px 0px rgba(50, 50, 50, 0.2);
+    background-color: #fff;
+    margin-top:45px;
+    padding-left: 0;
+    padding-right: 0;
+    -webkit-box-shadow: 1px 1px 5px 0px rgba(50, 50, 50, 0.2);
+    -moz-box-shadow:    1px 1px 5px 0px rgba(50, 50, 50, 0.2);
+    box-shadow:         1px 1px 5px 0px rgba(50, 50, 50, 0.2);
 }
 
 .background-login-header {
-	background-color: #fff;
-	background-image: url('../img/Industry_Solutions.jpg'); 
-	background-position: center;
-	/*-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;*/
-	-webkit-background-size: contain;
-	-moz-background-size: contain;
-	-o-background-size: contain;
-	background-size: contain;
-	background-repeat: no-repeat;
-	padding-left: 10px !important; 
-	padding-top: 0 !important; 
-	padding-bottom: 0 !important; 
-	margin-left: 0 !important;
-	margin-top: 0 !important;
-	margin-bottom: 0 !important;
-	height: 350px;
-	color: #fff;
-	font-size: 50px;
-	font-weight: 500;
+    background-color: #fff;
+    background-image: url('../img/Industry_Solutions.jpg'); 
+    background-position: center;
+    /*-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;*/
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding-left: 10px !important; 
+    padding-top: 0 !important; 
+    padding-bottom: 0 !important; 
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    height: 350px;
+    color: #fff;
+    font-size: 50px;
+    font-weight: 500;
 }
 
 .background-login-header div {
-	padding-top: 100px;
-	vertical-align: middle;
-	text-shadow: 2px 2px 6px rgba(0, 0, 0, 1);
+    padding-top: 100px;
+    vertical-align: middle;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 1);
 }
 
 .background-login-header strong {
-	font-size: 26px;
-	font-weight: 400;
+    font-size: 26px;
+    font-weight: 400;
 }
 
 .login-header {
-	font-size: 40px;
-	height: 60px !important;
-	background-color: #3f4549;
-	color: #fff;
+    font-size: 40px;
+    height: 60px !important;
+    background-color: #3f4549;
+    color: #fff;
 }
 
 .login-wrapper {
-	margin: 75px auto 0 !important;
+    margin: 75px auto 0 !important;
 }
 
 .btn-info-login.btn-perspective, .btn-info-login.btn-perspective:hover {
-	-webkit-box-shadow: 0px 3px 0px #2C3439;
-	-moz-box-shadow: 0px 3px 0px #2C3439;
-	box-shadow: 0px 3px 0px #2C3439;
-	color: #fff;
+    -webkit-box-shadow: 0px 3px 0px #2C3439;
+    -moz-box-shadow: 0px 3px 0px #2C3439;
+    box-shadow: 0px 3px 0px #2C3439;
+    color: #fff;
 }
 
 .btn-info-login  {
-	background-color: #3f4549;
-	border-color: #3f4549;
+    background-color: #3f4549;
+    border-color: #3f4549;
 }
 
 .btn-info-login:hover {
-	background-color: #34393d;
-	border-color: #34393d;
+    background-color: #34393d;
+    border-color: #34393d;
 }
 
 .login-label {
-	color: #3f4549;
+    color: #3f4549;
 }
 
 .the-box {
-	margin-top: 25px;
-	margin-bottom: 30px;
+    margin-top: 25px;
+    margin-bottom: 30px;
+    min-height: 423px;
 }
 
 /* Buttons */
@@ -129,7 +130,7 @@
 
 /* Circle Buttons */
 
- .btn-circle {
+.btn-circle {
     width: 30px;
     height: 30px;
     padding: 5px 0;
@@ -137,7 +138,7 @@
     text-align: center;
     font-size: 12px;
     line-height: 1.3;
-	outline: none;
+    outline: none;
 }
 
 .btn-circle.btn-lg {
