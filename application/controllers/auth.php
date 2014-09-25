@@ -122,7 +122,7 @@ class auth extends CI_Controller
 	 */
 	function register()
 	{
-		if ($this->tank_auth->is_logged_in() AND !$this->tank_auth->is_admin()) {	// logged in
+		if ($this->tank_auth->is_logged_in() AND !($this->tank_auth->is_admin() OR $this->tank_auth->is_super_admin())) {	// logged in			
 			redirect('/backend/dashboard');
 
 		} elseif ($this->tank_auth->is_logged_in(FALSE)) {							// logged in, not activated
@@ -188,7 +188,8 @@ class auth extends CI_Controller
 						}
 						unset($data['password']); // Clear password (just for any case)
 
-						if ($this->tank_auth->is_admin()) {
+						if ($this->tank_auth->is_admin() OR $this->tank_auth->is_super_admin()) {
+							$this->session->set_flashdata('msg', $this->mith_func->build_message('success', 'User successfully registered'));
 							redirect('/backend/user');
 						}
 						$this->_show_message($this->lang->line('auth_message_registration_completed_2').' '.anchor('/auth/login/', 'Login'));
