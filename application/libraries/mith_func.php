@@ -12,23 +12,23 @@ class Mith_func {
         echo '</pre>';
         exit;
     }
-    
+
     // MK: $(&#36;) or Rp.
-    function price_format($string, $mk="Rp. ", $nol=2){
-        return $mk." ".number_format($string, $nol, ",", ".");
+    function price_format($string, $mk = "Rp. ", $nol = 2) {
+        return $mk . " " . number_format($string, $nol, ",", ".");
     }
-    
-    function number_format($string){
+
+    function number_format($string) {
         return number_format($string, 0, ",", ".");
     }
-    
-    function uploaded_image($name, $path, $width=220, $height=220) {
+
+    function uploaded_image($name, $path, $width = 220, $height = 220) {
 //        $this->debugVar($_FILES[$name]);
         if (isset($_FILES[$name]['name']) && $_FILES[$name]['name'] != '') {
-            
-            $ext = substr(strrchr($_FILES[$name]["name"],'.'),1);
-            $newfilename = "voltshoes_".md5(date("YmdHis")."_".substr($_FILES[$name]["name"], 0, 3)).".".$ext;
-                
+
+            $ext = substr(strrchr($_FILES[$name]["name"], '.'), 1);
+            $newfilename = "voltshoes_" . md5(date("YmdHis") . "_" . substr($_FILES[$name]["name"], 0, 3)) . "." . $ext;
+
             $config['upload_path'] = realpath(APPPATH . $path);
             $config['allowed_types'] = 'jpg|JPG|jpeg|JPEG|gif|png';
             $config['max_size'] = '8000';
@@ -36,7 +36,7 @@ class Mith_func {
             $config['file_name'] = $newfilename;
 
             $this->CI->load->library('upload', $config);
-                    
+
             if (!$this->CI->upload->do_upload($name)) {
                 return array('error' => $this->CI->upload->display_errors());
             } else {
@@ -52,23 +52,25 @@ class Mith_func {
 
                 $this->CI->load->library('image_lib', $config);
                 $this->CI->image_lib->resize();
-                
+
                 return array('upload_data' => $this->CI->upload->data());
             }
         }
     }
-    
-    /** Function For Delete Image **/
+
+    /** Function For Delete Image * */
     function delete_image($filename, $path) {
         $path = realpath(APPPATH . $path);
         /* Delete Last File Image If Exists */
-        if($filename) {
+        if ($filename) {
 //            $this->mith_func->debugVar($path.$filename);
-            if(file_exists($path."/".$filename)) unlink($path."/".$filename);
-            if(file_exists($path."/thumb/".$filename)) unlink($path."/thumb/".$filename);
+            if (file_exists($path . "/" . $filename))
+                unlink($path . "/" . $filename);
+            if (file_exists($path . "/thumb/" . $filename))
+                unlink($path . "/thumb/" . $filename);
         }
     }
-    
+
     /**
      * 
      * convertDate
@@ -101,15 +103,15 @@ class Mith_func {
 
         return $indodate;
     }
-    
-    function date_format($date, $format="d M Y"){
+
+    function date_format($date, $format = "d M Y") {
         $dtime = strtotime($date);
         $ddate = date($format, $dtime);
 //        $this->debugVar($ddate);
-        
+
         return $ddate;
     }
-    
+
     function getWeatherYahoo($url) {
         $cuaca = array(
             0 => array(0 => "-", 1 => "-", 2 => array(0 => "-", 1 => "-"), 3 => "-"),
@@ -117,14 +119,14 @@ class Mith_func {
             2 => array(0 => "-", 1 => "-", 2 => array(0 => "-", 1 => "-"), 3 => "-"),
             3 => array(0 => "-", 1 => "-", 2 => array(0 => "-", 1 => "-"), 3 => "-")
         );
-        
+
         $cuaca_raw = @file_get_contents($url);
         if ($cuaca_raw === FALSE)
             return $cuaca;
-        
-        preg_match_all('#<yweather:forecast (.*?) />#',  $cuaca_raw, $detail);
+
+        preg_match_all('#<yweather:forecast (.*?) />#', $cuaca_raw, $detail);
 //        $this->debugVar($detail);
-        foreach($detail[1] as $key => $day){
+        foreach ($detail[1] as $key => $day) {
             preg_match('#text="(.*?)"#', $day, $info);
             preg_match('#low="(.*?)"#', $day, $low);
             preg_match('#high="(.*?)"#', $day, $high);
@@ -134,20 +136,20 @@ class Mith_func {
             $cuaca[$key][1] = $info[1];
             $cuaca[$key][2][0] = $low[1];
             $cuaca[$key][2][1] = $high[1];
-            $cuaca[$key][3] = $dday[1].", ".$date[1];
+            $cuaca[$key][3] = $dday[1] . ", " . $date[1];
         }
-        
-        preg_match_all('#<yweather:condition (.*?) />#',  $cuaca_raw, $today);
+
+        preg_match_all('#<yweather:condition (.*?) />#', $cuaca_raw, $today);
         preg_match('#text="(.*?)"#', $today[1][0], $info);
         preg_match('#temp="(.*?)"#', $today[1][0], $celc);
-        
+
         $cuaca[0][0] = $celc[1];
         $cuaca[0][1] = $info[1];
-        
+
 //        $this->debugVar($cuaca);
         return $cuaca;
     }
-    
+
     function getWeather($url) {
         $cuaca = array(
             0 => array(0 => "-", 1 => "-", 2 => array(0 => "-", 1 => "-"), 3 => "-"),
@@ -197,12 +199,12 @@ class Mith_func {
         return $cuaca;
     }
 
-    function time_elapsed_string($ptime, $solrFormat=False) {
-        if($solrFormat) {
+    function time_elapsed_string($ptime, $solrFormat = False) {
+        if ($solrFormat) {
             $ptime = substr(str_replace("T", " ", $ptime), 0, -4);
         }
-        
-        $etime = time() - strtotime($ptime);        
+
+        $etime = time() - strtotime($ptime);
         if ($etime < 1) {
             return 'just now';
         }
@@ -222,17 +224,30 @@ class Mith_func {
                 return $r . ' ' . $str . ($r > 1 ? 's' : '') . ' ago';
             }
         }
+    }    
+    
+    # koran, news-online, tv, radio
+    function getMediaTypeList(){
+        $nList = array();
+        $nList['koran'] = "Koran";
+        $nList['news-online'] = "News Online";
+        $nList['tv'] = "TV";
+        $nList['radio'] = "Radio";
+        
+        return $nList;
     }
     
+    
     /** End Added by RR * */
-	
-	function build_message($type='info', $msg='') {
-		# a.ardiansyah
-		return '
-			<div class="alert alert-'.$type.' alert-bold-border square fade in alert-dismissable">
-				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-				'.$msg.'				
-			</div>
+    
+    function build_message($type = 'info', $msg = '') {
+        # a.ardiansyah
+        return '
+                <div class="alert alert-' . $type . ' alert-bold-border square fade in alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        ' . $msg . '				
+                </div>
 		';
-	}
+    }
+
 }
