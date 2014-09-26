@@ -23,10 +23,12 @@
 						?>
 						<div <?php echo $active;?>>
 						  <img src="<?php echo $news->url; ?>" alt="Image slide" onerror="this.onerror=null;this.src='<?php echo ""; ?>';" style="max-height: 395px;min-height: 395px">
-						  <div class="carousel-caption dark-bg" style="max-height: 180px;min-height: 180px;width:100%">
-							<h4 class="text-left" style="padding-left:10px;"><a href="#fakelink"><?php echo $news->title; ?></a></h4>
-							<p class="text-left" style="padding:0 10px;"><small><?php echo $news->desc; ?></small></p>
+						  <div class="carousel-caption dark-bg" style="max-height: 395px;min-height: 395px;width:100%">
+							<h4 class="text-left" style="padding: 0 10px;"><a href="#fakelink"><?php echo $news->title; ?></a></h4>
+							<p class="text-muted text-left" style="padding:0 10px;"><small><small>Posted on <?php echo str_replace("+", " ", ucfirst($news->media)); ?>, <?php echo $this->mith_func->time_elapsed_string($news->pubDate, TRUE); ?></small></small></p>
+							<p class="text-left" style="padding:0 10px;position:absolute;bottom:5px;"><small><?php echo $news->desc; ?></small></p>
 						  </div>
+
 						</div>
 					<?php ++$no; } ?>
 				  </div>
@@ -39,14 +41,15 @@
 					<span class="small-title">LATEST NEWS</span>
 					<a class="pull-right" href="#fakelink"><small>More</small></a>
 				</div>
-                <ul class="widget-newsticker media-list" style="height:200px !important">
-                    <?php foreach ($data_news as $news) { ?>
-                        <li class="media" style="height:auto;border:0">
-                            <h5 class="media-heading"><a href="#fakelink"><?php echo $news->title; ?></a></h5>
-                            <p class="text-muted"><small><small>Posted on <?php echo str_replace("+", " ", ucfirst($news->media)); ?>, <?php echo $this->mith_func->time_elapsed_string($news->pubDate, TRUE); ?></small></small></p>
-                        </li>                            
-                    <?php } ?>
-                </ul>
+                <ul class="list-group currency-rates widget-currency-ticker" style="height:180px !important">
+                	<?php foreach ($data_news as $news) { ?>
+					<li class="list-group-item" style="height:auto;border:0;padding:0 0 5px 0;">
+						<h5 class="media-heading"><a href="#fakelink"><?php echo $news->title; ?></a></h5>
+                        <p class="text-muted"><small><small>Posted on <?php echo str_replace("+", " ", ucfirst($news->media)); ?>,
+                        <?php echo $this->mith_func->time_elapsed_string($news->pubDate, TRUE); ?></small></small></p>
+					</li>
+					<?php } ?>
+				</ul>
                 <br/>
                 <div class="section-title">
 					<span class="small-title">TOP PERSONS</span>
@@ -77,12 +80,12 @@
 					<a class="pull-right" href="#fakelink"><small>More</small></a>
 				</div>
 				<ul class="list-unstyled">
-					<li><h4>Converter Kit</h4></li>
-					<li><h5>Harga Mobil</h5></li>
-					<li><h6>iPhone 6 Smartphones</h6></li>
-					<li><h6>Meluncurkan Smartphone Murah</h6></li>
-					<li><h6>New York</h6></li>
-					<li><h6>Paripurna DPR</h6></li>
+					<li><h4 class="text-primary">Converter Kit</h4></li>
+					<li><h5 class="text-primary">Harga Mobil</h5></li>
+					<li><h6 class="text-primary">iPhone 6 Smartphones</h6></li>
+					<li><h6 class="text-primary">Meluncurkan Smartphone Murah</h6></li>
+					<li><h6 class="text-primary">New York</h6></li>
+					<li><h6 class="text-primary">Paripurna DPR</h6></li>
 				</ul>
 			</div>
 		</div>
@@ -107,7 +110,7 @@
 		ykeys: ['a', 'b'],
 		labels: ['Series A', 'Series B'],
 		resize: true,
-		lineColors: ['#967ADC', '#D770AD']
+		lineColors: ['#29AF8E', '#D770AD']
 		});
 		/********************************* END EXAMPLE MORRIS AREA *********************************/
 	</script>
