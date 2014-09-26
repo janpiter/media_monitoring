@@ -10,9 +10,9 @@
             <!-- End page heading -->
             <!-- Begin breadcrumb -->
             <ol class="breadcrumb default square rsaquo sm">
-                <li><a href="/backend/dashboard"><i class="fa fa-home"></i></a></li>
-                <li>Data Management</li>
+                <li><a href="<?php echo base_url('backend/dashboard'); ?>"><i class="fa fa-home"></i></a></li>
                 <li class="active"><?php echo $page_title; ?></li>
+                <!-- <li class="active">Log</li> -->
             </ol>
             <!-- End breadcrumb -->
             <!-- BEGIN DATA TABLE -->
