@@ -110,7 +110,7 @@ class logging_model extends CI_Model {
         $data = $this->getLog($log_id);
         $this->db->where('history_id', $log_id);
         $this->db->delete($this->table_name);
-        $this->insertLog('delete', $this->table_name, $log_id, $data);
+        // $this->insertLog('delete', $this->table_name, $log_id, $data);
         
         $res = $this->db->_error_number();
         return $res;
