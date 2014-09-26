@@ -43,10 +43,22 @@
         <li>
             <a href="front-end.html">
                 <i class="fa fa-newspaper-o icon-sidebar"></i>
-                News Scoring							
+                News Scoring System				
             </a>
         </li>				
-        <li class="static">REPORTING</li>
+        <li class="static">REPORTING MENU</li>
+		<li>
+            <a href="<?php echo base_url('backend/reporting') ?>">
+                <i class="fa fa-file-text-o icon-sidebar"></i>
+                Reporting By Parameter
+            </a>
+        </li>				
+		<li>
+            <a href="<?php echo base_url('backend/comparing') ?>">
+                <i class="fa fa-bar-chart icon-sidebar"></i>
+                Comparing News
+            </a>
+        </li>		
         <!-- <li class="text-content">
             <div class="switch">
                 <div class="onoffswitch blank">

@@ -94,6 +94,14 @@ class Tank_auth
 									$this->ci->config->item('login_record_time', 'tank_auth'));
 							return TRUE;
 						}
+						
+						# setting cookies
+						set_cookie(array(
+							'name'   => 'autologout',
+							'value'  => $user->id,
+							'expire' => time() + 60,
+							'path' => base_url('/auth/logout')
+						));
 					}
 				} else {														// fail - wrong password
 					$this->increase_login_attempt($login);
