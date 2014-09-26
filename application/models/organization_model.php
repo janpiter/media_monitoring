@@ -51,11 +51,14 @@ class organization_model extends CI_Model {
     }
 
     function deleteOrganization($organization_id) {
+        $data = $this->getOrganization($organization_id);
+        // print_r($data);
+        // exit();
         $this->db->where('organization_id', $organization_id);
         $this->db->delete($this->table_name);
-        $this->log->insertLog('delete', $this->table_name, $organization_id, '');
+        $this->log->insertLog('delete', $this->table_name, $organization_id, $data);
         
-        $res = $this->db->_error_number();        
+        $res = $this->db->_error_number();
         return $res;
     }
         

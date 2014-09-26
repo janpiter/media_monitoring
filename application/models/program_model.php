@@ -5,6 +5,14 @@ class program_model extends CI_Model {
     private $table_name = 'program';
     private $table_join = 'publisher';
     
+    function __construct() {
+        parent::__construct();
+
+        $CI =& get_instance();
+        $CI->load->model('logging_model');
+        $this->log = $CI->logging_model;
+    }
+
     function getList($where=array(), $start=0, $limit=0) {
         $this->db->select($this->table_name.'.*, publisher_name');
         $this->db->from($this->table_name);
@@ -35,18 +43,20 @@ class program_model extends CI_Model {
     function insertProgram($data) {
         $this->db->insert($this->table_name, $data);
         $last_id = $this->db->insert_id();
-        
+        $this->log->insertLog('input', $this->table_name, $last_id, $data);
         return $last_id;
     }
 
     function updateProgram($data) {
         $this->db->where('program_id', $data['program_id']);
         $this->db->update($this->table_name, $data);        
+        $this->log->insertLog('update', $this->table_name, $data['organization_id'], $data);
     }
 
     function deleteProgram($program_id) {
         $this->db->where('program_id', $program_id);
         $this->db->delete($this->table_name);
+        $this->log->insertLog('delete', $this->table_name, $topic_id, $data);
         
         $res = $this->db->_error_number();        
         return $res;
