@@ -41,6 +41,8 @@
 # $route['default_controller'] = "frontpage";
 # $route['404_override'] = '';
 
+$route['backend'] = "auth/login";
+
 $default_controller = "frontpage";
 $language_alias = array('en','id');
 $controller_exceptions = array('backend', 'auth/*', 'solr');
