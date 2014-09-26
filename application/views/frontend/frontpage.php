@@ -1,106 +1,130 @@
-<body class="background-image">
+<body style="padding-top:5px;">
 
 	<div class="container">
-		<div class="col-xs-12">
-			chart
+		<div class="col-sm-12">
+			<h1>
+				<i class="fa fa-line-chart"></i>&nbsp;&nbsp;IRC&nbsp;&nbsp;<span class="text-muted">Media Information System</span>
+			</h1>
+			<hr/>
 		</div>
-		<div class="col-xs-3">
-			<ul class="media-list media-xs">
-				<li class="media">
-					<div class="media-body">
-						<h5 class="media-heading">News Title</h5>
-						<p class="date">Just now</p>
-						<p class="small">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis...</p>
-					</div>
-				</li>
-			</ul>
-		<!-- </div> -->
-		<!-- <div class="col-xs-3"> -->
-			<div class="the-box no-border full">
-				<div class="the-box no-border bg-primary no-margin">
-					<h4>Next week agenda</h4>
-					<hr>
-					<div id="tiles-slide-1" class="owl-carousel my-reminder">
-						<div class="owl-wrapper-outer">
-							<div class="owl-wrapper">
-								<div class="owl-item">
-									<div class="item full text-left">
-										<p>
-											Eating some sand and listening alay songs in the small hole under bridge
-										</p>
-										<p class="small">Wrote about a month ago</p>
-									</div>
-								</div>
-								<div class="owl-item">
-									<div class="item full">
-										<p>
-											Go to school again, do homework again, meet some best friends again
-										</p>
-										<p class="small">Wrote about a week ago</p>
-									</div>
-								</div>
-								<div class="owl-item">
-									<div class="item full">
-										<p>
-											Finishing all my works, time to vacation, spending time with family and friends
-										</p>
-										<p class="small">Wrote 2 days ago</p>
-									</div>
-								</div>
-							</div>
+		<div class="col-sm-4">
+			<div class="box">
+				<div class="section-title">
+					<span class="small-title">PICTURES</span>
+					<a class="pull-right" href="#fakelink"><small>More</small></a>
+				</div>
+				<div id="bs-carousel-2" class="carousel slide no-margin" data-ride="carousel">
+				  <div class="carousel-inner">
+					<?php 
+						$no = 0;
+						foreach ($data_news as $news) { 
+							if ($no == 0) { $active = 'class="item active"'; }
+							else { $active = 'class="item"'; }
+						?>
+						<div <?php echo $active;?>>
+						  <img src="<?php echo $news->url; ?>" alt="Image slide" onerror="this.onerror=null;this.src='<?php echo ""; ?>';" style="max-height: 395px;min-height: 395px">
+						  <div class="carousel-caption dark-bg" style="max-height: 180px;min-height: 180px;width:100%">
+							<h4 class="text-left" style="padding-left:10px;"><a href="#fakelink"><?php echo $news->title; ?></a></h4>
+							<p class="text-left" style="padding:0 10px;"><small><?php echo $news->desc; ?></small></p>
+						  </div>
 						</div>
-						<div class="owl-controls clickable">
-							<div class="owl-buttons">
-								<div class="owl-prev">←</div>
-								<div class="owl-next">→</div>
-							</div>
-						</div>
-					</div>
+					<?php ++$no; } ?>
+				  </div>
 				</div>
 			</div>
-
 		</div>
-
-		<div class="col-xs-9">
-			<div class="the-box no-border">
-				<!-- <div class="media user-card-sm">
-					<a class="pull-left" href="#fakelink">
-						<img class="media-object img-circle" src="assets/img/avatar/avatar-7.jpg" alt="Avatar">
-					</a>
-					<div class="media-body">
-						<h4 class="media-heading">Elizabeth Owens</h4>
-						<p class="text-info">@elizabethowens</p>
-					</div>
-					<div class="right-button">
-						<button class="btn btn-info fa fa-laptop icon-circle icon-xs"></button>
-					</div>
-				</div> -->
-
-
-				<!-- <div class="featured-post-wide">
-								<div id="blog-slide-1" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
-								  <div class="owl-wrapper-outer"><div class="owl-wrapper" style="width: 4218px; left: -1406px; display: block;"><div class="owl-item" style="width: 703px;"><div class="item full"><img src="assets/img/photo/wide/img-1.jpg" alt="Image"></div></div><div class="owl-item" style="width: 703px;"><div class="item full"><img src="assets/img/photo/wide/img-2.jpg" alt="Image"></div></div><div class="owl-item" style="width: 703px;"><div class="item full"><img src="assets/img/photo/wide/img-3.jpg" alt="Image"></div></div></div></div>
-								  
-								  
-								</div>
-								<div class="featured-text relative-left">
-									<i class="fa fa-picture-o icon-danger icon-square icon-xs icon-type"></i>
-									<h3><a href="#fakelink">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</a></h3>
-									<p class="date">2 hours ago</p>
-									<p>
-									Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
-									</p>
-									<p class="additional-post-wrap">
-										<span class="additional-post"><i class="fa fa-user"></i>by <a href="#fakelink">Admin</a></span>
-										<span class="additional-post"><i class="fa fa-clock-o"></i><a href="#fakelink">April 20</a></span>
-										<span class="additional-post"><i class="fa fa-comment"></i><a href="#fakelink">3 comments</a></span>
-									</p>
-									<hr>
-									<p class="text-right"><button class="btn btn-success">Read more</button></p>
-								</div>
-							</div> -->
-
-
+		<div class="col-sm-4">
+			<div class="box">
+				<div class="section-title">
+					<span class="small-title">LATEST NEWS</span>
+					<a class="pull-right" href="#fakelink"><small>More</small></a>
+				</div>
+                <ul class="widget-newsticker media-list" style="height:200px !important">
+                    <?php foreach ($data_news as $news) { ?>
+                        <li class="media" style="height:auto;border:0">
+                            <h5 class="media-heading"><a href="#fakelink"><?php echo $news->title; ?></a></h5>
+                            <p class="text-muted"><small><small>Posted on <?php echo str_replace("+", " ", ucfirst($news->media)); ?>, <?php echo $this->mith_func->time_elapsed_string($news->pubDate, TRUE); ?></small></small></p>
+                        </li>                            
+                    <?php } ?>
+                </ul>
+                <br/>
+                <div class="section-title">
+					<span class="small-title">TOP PERSONS</span>
+					<a class="pull-right" href="#fakelink"><small>More</small></a>
+				</div>
+				<button class="btn btn-primary btn-sm btn-perspective">Joko Widodo</button>
+				<button class="btn btn-primary btn-sm btn-perspective">Susilo Bambang Yudhoyono</button>
+				<button class="btn btn-primary btn-sm btn-perspective">Barack Obama</button>
+				<button class="btn btn-primary btn-sm btn-perspective">Priyo Budi Santoso</button>
+				<button class="btn btn-primary btn-sm btn-perspective">Annas Maamun</button>
+				<button class="btn btn-primary btn-sm btn-perspective">Jusuf Kalla</button>
+				<button class="btn btn-primary btn-sm btn-perspective">Tony Abbott</button>
+				<button class="btn btn-primary btn-sm btn-perspective">Basuki Tjahaja Purnama</button>
+				<button class="btn btn-primary btn-sm btn-perspective">Johan Budi Sapto Prabowo</button>
+				<button class="btn btn-primary btn-sm btn-perspective">Benny K Harman</button>
+            </div>
+		</div>
+		<div class="col-sm-4">
+			<div class="box">
+				<div class="section-title">
+					<span class="small-title">MORRIS AREA</span>
+					<a class="pull-right" href="#fakelink"><small>More</small></a>
+				</div>
+				<div id="morris-area-example" style="height: 200px;"></div>
+				<br/>
+				<div class="section-title">
+					<span class="small-title">TRENDING TOPICS</span>
+					<a class="pull-right" href="#fakelink"><small>More</small></a>
+				</div>
+				<ul class="list-unstyled">
+					<li><h4>Converter Kit</h4></li>
+					<li><h5>Harga Mobil</h5></li>
+					<li><h6>iPhone 6 Smartphones</h6></li>
+					<li><h6>Meluncurkan Smartphone Murah</h6></li>
+					<li><h6>New York</h6></li>
+					<li><h6>Paripurna DPR</h6></li>
+				</ul>
 			</div>
 		</div>
 	</div>
+
+	<script src="<?php echo base_url('assets/plugins/morris-chart/raphael.min.js') ?>"></script>
+	<script src="<?php echo base_url('assets/plugins/morris-chart/morris.min.js') ?>"></script>
+	<script language="javascript">
+		/********************************* BEGIN EXAMPLE MORRIS AREA *********************************/
+		Morris.Area({
+		element: 'morris-area-example',
+		data: [
+		{ y: '2006', a: 100, b: 90 },
+		{ y: '2007', a: 75,  b: 65 },
+		{ y: '2008', a: 50,  b: 40 },
+		{ y: '2009', a: 75,  b: 65 },
+		{ y: '2010', a: 50,  b: 40 },
+		{ y: '2011', a: 75,  b: 65 },
+		{ y: '2012', a: 100, b: 90 }
+		],
+		xkey: 'y',
+		ykeys: ['a', 'b'],
+		labels: ['Series A', 'Series B'],
+		resize: true,
+		lineColors: ['#967ADC', '#D770AD']
+		});
+		/********************************* END EXAMPLE MORRIS AREA *********************************/
+	</script>
+	<style type="text/css">
+	.box {
+		padding: 10px;
+	}
+	.box button {
+		margin-bottom: 5px;
+	}
+	li.media {
+		padding-top: 0 !important;
+		margin-top: 0 !important;
+	}
+	 .section-title {
+	 	padding-bottom: 5px;
+	 	margin-bottom: 10px;
+	 	border-bottom: 1px dotted #EEEEEE;
+	 }
+	</style>
