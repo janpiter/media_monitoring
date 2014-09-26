@@ -11,10 +11,10 @@
 			<!-- End page heading -->			
 			<!-- Begin breadcrumb -->
 			<ol class="breadcrumb default square rsaquo sm">
-				<li><a href="index.html"><i class="fa fa-home"></i></a></li>
-				<li><a href="#fakelink">Data Management</a></li>
-				<li class="active"><?php echo $page_title; ?></li>
-			</ol>
+                <li><a href="<?php echo base_url('/backend/dashboard'); ?>"><i class="fa fa-home"></i></a></li>
+                <li>Data Management</li>
+                <li class="active"><?php echo $page_title; ?></li>
+            </ol>
 			<!-- End breadcrumb -->			
 			<!-- BEGIN DATA TABLE -->
 			<div class="the-box">				
@@ -41,7 +41,7 @@
 							<th>Name</th>
 							<th>Media Type</th>
 							<th>Created</th>									
-							<th></th>									
+							<th>Action</th>									
 						</tr>
 					</thead>
 					<tbody>
@@ -53,7 +53,7 @@
 							<td><?php echo $obj->publisher_name; ?></td>
 							<td><?php echo $this->mith_func->getMediaTypeList()[$obj->media_type]; ?></td>
 							<td><?php echo $this->mith_func->time_elapsed_string($obj->created); ?></td>									
-							<td class="text-right">
+							<td class="text-left">
 								<div class="btn-group">
 									<button type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown">
 										<i class="fa fa-cogs"></i>
@@ -131,14 +131,14 @@
 			<form role="form" action="<?php echo base_url('backend/publisher/add') ?>" method="post">
 				<div class="modal-body">																			
 					<div class="form-group">
-						<label>Publiher</label>
+						<label>Publisher</label>
 						<input type="text" name="publisher_name" class="form-control has-feedback" autofocus required />
 						<!-- <span class="fa fa-male form-control-feedback"></span> -->				
 					</div>
 					<div class="form-group">
 						<label>Media Type</label>
 						<select name="media_type" class="form-control" tabindex="2" required >
-							<option value="" disabled selected>Choosen Media Type</option>
+							<option value="" disabled selected>-- Choosen Media Type --</option>
 							<!-- choosen -->
 							<?php 
 								foreach($this->mith_func->getMediaTypeList() as $k => $v) {
@@ -168,7 +168,7 @@
 			<form role="form" action="<?php echo base_url('backend/publisher/edit') ?>" method="post">
 				<div class="modal-body">																			
 					<div class="form-group">
-						<label>Publiher</label>
+						<label>Publisher</label>
 						<input type="text" id="edit_publisher_name" name="edit_publisher_name" class="form-control has-feedback" autofocus required />
 						<input type="hidden" name="edit_publisher_id" value="">
 						<!-- <span class="fa fa-male form-control-feedback"></span> -->				

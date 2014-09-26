@@ -12,13 +12,13 @@
 			<div class="page-content">
 				<div class="container-fluid">
 					<!-- Begin page heading -->
-					<h1 class="page-heading">USER MANAGEMENTS&nbsp;&nbsp;<small>Controling User Permission</small></h1>
+					<h1 class="page-heading">USER MANAGEMENTS&nbsp;&nbsp;<small>controling permission</small></h1>
 					<!-- End page heading -->
 					
 					<!-- Begin breadcrumb -->
 					<ol class="breadcrumb default square rsaquo sm">
-						<li><a href="index.html"><i class="fa fa-home"></i></a></li>
-						<li><a href="#fakelink">User Management</a></li>
+						<li><a href="<?php echo base_url('/backend/dashboard'); ?>"><i class="fa fa-home"></i></a></li>
+						<li>User Management</li>
 						<li class="active">Users</li>
 					</ol>
 					<!-- End breadcrumb -->
@@ -42,7 +42,7 @@
 									<th>Username</th>
 									<th>Email</th>
 									<th>Last Login</th>
-									<th></th>									
+									<th>Action</th>									
 								</tr>
 							</thead>
 							<tbody>
@@ -57,12 +57,12 @@
 									<td><?php echo $u->username; ?></td>
 									<td><?php echo $u->email; ?></td>
 									<td><?php echo $this->mith_func->time_elapsed_string($u->last_login); ?></td>
-									<td class="text-right">
+									<td class="text-left">
 										<div class="btn-group">
 											<button type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown">
 												<i class="fa fa-cogs"></i>
 											</button>
-											<ul class="dropdown-menu pull-right" role="menu">												
+											<ul class="dropdown-menu" role="menu">												
 												<li><a href="#" class="edit-row" data-id="<?php echo $u->id; ?>">Edit Data</a></li>
 												<li><a href="#" class="delete-row" data-id="<?php echo $u->id; ?>">Delete Data</a></li>
 												<li class="divider"></li>
