@@ -87,7 +87,12 @@
 .the-box {
     margin-top: 25px;
     margin-bottom: 30px;
-    min-height: 423px;
+    min-height: 450px;
+}
+
+.the-box-db {
+    margin-top: 25px;
+    margin-bottom: 30px;
 }
 
 /* Buttons */

@@ -31,13 +31,13 @@
             </a>
             <ul class="submenu">
                 <li><a href="<?php echo base_url('backend/news') ?>">News</a></li>
-                <li><a href="<?php echo base_url('backend/publisher') ?>">Publisher</a></li>
-                <li><a href="<?php echo base_url('backend/programs') ?>">Programs</a></li>
-                <li><a href="<?php echo base_url('backend/topic') ?>">Topic</a></li>
-                <li><a href="<?php echo base_url('backend/sub_topic') ?>">Sub Topic</a></li>
-                <li><a href="<?php echo base_url('backend/person') ?>">Person</a></li>
-                <li><a href="<?php echo base_url('backend/person_title') ?>">Person Title</a></li>
-                <li><a href="<?php echo base_url('backend/organization') ?>">Organization</a></li>                
+                <li><a href="<?php echo base_url('backend/publisher') ?>">Publishers</a></li>
+                <li><a href="<?php echo base_url('backend/program') ?>">Programs</a></li>
+                <li><a href="<?php echo base_url('backend/topic') ?>">Topics</a></li>
+                <li><a href="<?php echo base_url('backend/sub_topic') ?>">Sub Topics</a></li>
+                <li><a href="<?php echo base_url('backend/person') ?>">Persons</a></li>
+                <li><a href="<?php echo base_url('backend/person_title') ?>">Person Titles</a></li>
+                <li><a href="<?php echo base_url('backend/organization') ?>">Organizations</a></li>                
             </ul>
         </li>
         <li>

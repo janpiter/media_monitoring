@@ -68,8 +68,8 @@ BEGIN PAGE
                     </div><!-- /.panel panel-success panel-block-color -->
                     <!-- END TODAY VISITOR TILES -->
                 </div><!-- /.col-sm-6 -->
-                <div class="col-lg-6">
 
+                <div class="col-lg-6">
                     <!-- BEGIN WEATHER WIDGET 2 -->
                     <div class="panel panel-info panel-square panel-no-border">
                         <div class="panel-heading">
@@ -153,7 +153,7 @@ BEGIN PAGE
                     <!-- END PERCENTAGE MONITOR -->
 
                     <!-- BEGIN HEADLINE NEWS TILES -->
-                    <div class="the-box no-border bg-warning full">
+                    <div class="the-box-db no-border bg-warning full">
                         <div id="tiles-slide-4" class="owl-carousel tiles-carousel-color-2">
                             <div class="item full">
                                 <div class="des">
@@ -180,12 +180,12 @@ BEGIN PAGE
                                 </div>
                             </div><!-- /.item full -->
                         </div><!-- /#tiles-slide-2 -->
-                    </div><!-- /.the-box no-border full -->
+                    </div><!-- /.the-box-db no-border full -->
                     <!-- END HEADLINE NEWS TILES -->
 
                 </div><!-- /.col-lg-6 col-md-12 col-sm-12 -->
                 <div class="col-lg-6 col-md-12 col-sm-12">
-                    <div class="the-box no-border full">
+                    <div class="the-box-db no-border full">
                         <button class="btn btn-block btn-primary btn-square" id="w-newsticker-next"><i class="fa fa-chevron-up"></i></button>
                         <ul class="widget-newsticker media-list">
                             <?php foreach ($data_news as $news) { ?>
@@ -202,13 +202,10 @@ BEGIN PAGE
                             <?php } ?>
                         </ul>
                         <button class="btn btn-block btn-primary btn-square" id="w-newsticker-prev"><i class="fa fa-chevron-down"></i></button>
-                    </div><!-- /.the-box no-border -->
+                    </div><!-- /.the-box-db no-border -->
 
                 </div><!-- /.col-lg-5 col-md-12 col-sm-12 -->
             </div><!-- /.row -->
-
-
-
 
             <div class="row">
                 <div class="col-sm-12 col-md-8">
@@ -222,12 +219,12 @@ BEGIN PAGE
                             <h3 class="panel-title"><strong>YOUR SERVER STATUS</strong></h3>
                         </div>
                         <div id="panel-chart-widget-1" class="collapse in">
-                            <div class="the-box no-border full bg-success no-margin">
+                            <div class="the-box-db no-border full bg-success no-margin">
                                 <div id="realtime-chart-widget">
                                     <div id="realtime-chart-container-widget"></div>
                                 </div><!-- /.realtime-chart -->
-                            </div><!-- /.the-box .no-border -->
-                            <div class="the-box no-border">
+                            </div><!-- /.the-box-db .no-border -->
+                            <div class="the-box-db no-border">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="row">
@@ -271,9 +268,9 @@ BEGIN PAGE
                                         </div><!-- /.progress .no-rounded -->
                                     </div><!-- /.col-sm-6 -->
                                 </div><!-- /.row -->
-                            </div><!-- /.the-box .no-border -->
+                            </div><!-- /.the-box-db .no-border -->
                         </div><!-- /#panel-chart-widget-1 -->
-                    </div><!-- /.the-box .no-border -->
+                    </div><!-- /.the-box-db .no-border -->
                     <!-- END SERVER STATUS WIDGET -->
 
                 </div><!-- /.col-sm-12 col-md-8 -->
@@ -281,8 +278,8 @@ BEGIN PAGE
                 <div class="col-sm-12 col-md-4">
 
                     <!-- BEGIN PROFILE CARD  -->
-                    <div class="the-box no-border full card-info">
-                        <div class="the-box no-border text-center no-margin">
+                    <div class="the-box-db no-border full card-info">
+                        <div class="the-box-db no-border text-center no-margin">
                             <h4 class="bolded">Brenda Fuller</h4>
                             <img src="assets/img/avatar/avatar-15.jpg" class="social-avatar has-margin has-light-shadow img-circle" alt="Avatar">
                             <p class="text-info">@brendafuller</p>
@@ -297,9 +294,9 @@ BEGIN PAGE
                                 <a href="#fakelink"><i class="fa fa-dribbble icon-xs icon-circle icon-dribbble"></i></a>
                                 <a href="#fakelink"><i class="fa fa-google-plus icon-xs icon-circle icon-google-plus"></i></a>
                             </p>
-                        </div><!-- /.the-box .no-border .bg-info .no-margin -->
+                        </div><!-- /.the-box-db .no-border .bg-info .no-margin -->
                         <button class="btn btn-primary btn-block btn-lg btn-square"><i class="fa fa-user"></i> Follow</button>
-                    </div><!-- /.the-box -->
+                    </div><!-- /.the-box-db -->
                     <!-- END PROFILE CARD  -->
                 </div>
             </div>
