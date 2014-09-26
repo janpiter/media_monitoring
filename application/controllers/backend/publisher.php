@@ -7,119 +7,148 @@ class publisher extends CI_Controller {
 
 	private $error = array();
 	
-	public function __construct() {
-		parent::__construct();
-		$this->load->model('publisher_model', '', TRUE);
-		
-		$this->load->library('tank_auth_groups', '', 'tank_auth');
-        $this->lang->load('tank_auth');
-		
-		# check login
-		if (!$this->tank_auth->is_logged_in()) redirect('/auth/login/'); 
-		
-		# language
-		$lang = 'en';
-        if ($this->session->userdata('misircLang')) $lang = $this->session->userdata('misircLang');		
-		$language = array('id' => 'indonesia', 'en' => 'english');
-		
-		$this->lang->load($language[$lang], $language[$lang]);
-	}
-	
-	public function index() { $this->home(array()); }	
-	public function home($data) {
-		if (!$this->tank_auth->is_logged_in()) redirect('/auth/login/');
-		
-		$data = $this->session->flashdata('parsing_data');
-		
-		$data['publisher'] = $this->publisher_model->get_all(array('flag' => 0));
-		$data['media_type'] = $this->mith_func->getMediaTypeList();
-		
-		if(!key_exists("error", $data)) $data['error'] = array();
+	function __construct() {
+        parent::__construct();
+        
+        $this->load->model('publisher_model', '', TRUE);
 
-		$this->load->view('include/header_backend');
-        $this->load->view('backend/publisher', $data);
-        $this->load->view('include/footer_backend');		
-	}
+        $this->load->library('tank_auth_groups', '', 'tank_auth');
+        $this->lang->load('tank_auth');
+        
+        if (!$this->tank_auth->is_logged_in()) redirect('/auth/login/');        
+        
+        $lang = 'en';
+        if ($this->session->userdata('misircLang')) {
+            $lang = $this->session->userdata('misircLang');
+        }
+
+        switch ($lang) {
+            case 'en': $language = 'english';
+                break;
+
+            case 'id': $language = 'indonesia';
+                break;
+
+            default: $language = 'english';
+        }
+        
+        $this->lang->load($language, $language);
+    }
 	
-	public function get() {		
-		echo json_encode($this->publisher_model->get_publisher_by_id($this->input->post('id')));
-		exit();
-	}
+	 # default view
+    public function index() {
+        $this->home(array());
+    }
+	
+	public function home($data) {
+        if (!$this->tank_auth->is_logged_in()) {
+            redirect('/auth/login/');
+        }
+         
+        $data = $this->session->flashdata('parsing_data');
+		
+        $data['objList'] = $this->publisher_model->getList(array('flag' => 0));
+        $data['content_view'] = "backend/publisher.php";
+        $data['page_title'] = "Publishers";
+        $data['page_desc'] = "manage the entire publishers data";
+        
+        if(!key_exists("error", $data)) $data['error'] = array();
+        
+        $this->load->view('include/header_backend');
+        $this->load->view('backend/publisher', $data);
+        $this->load->view('include/footer_backend');
+    }
 	
 	public function add() {
-	
-		$msg = $this->mith_func->build_message('danger', $this->lang->line('MESSAGE_INSERT_FAILED'));
-		
-		if($this->validate()) {
-			$param = array(
-				'publisher_name' => $this->input->post('name'),
-				'media_type' => $this->input->post('media_type'),
-				'user_id' => $this->tank_auth->get_user_id()
-			);
-			
-			$publisher = $this->publisher_model->create_publisher($param);
-			
-			$msg = $this->mith_func->build_message('success', $this->lang->line('MESSAGE_INSERT_SUCCESS'));									
-		}
-		
-		if (count($this->error) > 0) {
-			foreach($this->error as $k => $e) {
-				$msg .= $this->mith_func->build_message('danger', $e);
-			}
-		}
-		
-		$this->session->set_flashdata('msg', $msg);
-		
-		redirect('backend/publisher');
-	}
+        $data['message_sys'] = $this->lang->line('MESSAGE_INSERT_FAILED');
+        $data['class'] = 'danger';
+        
+        if ($this->validate()) {
+            $insert_data = array(
+                'publisher_name' => $this->input->post('publisher_name'),
+                'media_type' => $this->input->post('media_type'),
+                'user_id' => $this->tank_auth->get_user_id()
+            );
+
+            $id = $this->publisher_model->insertPublisher($insert_data);
+
+            $data['message_sys'] = $this->lang->line('MESSAGE_INSERT_SUCCESS');
+            $data['class'] = 'success';
+
+            $this->session->set_flashdata('parsing_data', $data);
+            redirect('backend/publisher');
+        } else {
+            # error management
+            $data['error'] = $this->error;
+        }
+        
+        $this->session->set_flashdata('parsing_data', $data);
+        redirect('backend/publisher');        
+    }
 	
 	public function edit() {
-	
-		$msg = $this->mith_func->build_message('danger', $this->lang->line('MESSAGE_EDIT_FAILED'));
-		
-		if (($this->input->server('REQUEST_METHOD') == 'POST') && $this->validate("edit_")) {
-            $param = array(
-                'publisher_name' => $this->input->post('name'),
-                'media_type' => $this->input->post('media_type'),
-				'user_id' => $this->tank_auth->get_user_id()
+        $data['message_sys'] = $this->lang->line('MESSAGE_EDIT_FAILED');
+        $data['class'] = 'danger';
+        
+        if (($this->input->server('REQUEST_METHOD') == 'POST') && $this->validate("edit_")) {
+            $update_data = array(
+                'publisher_id' => $this->input->post('edit_publisher_id'),
+                'publisher_name' => $this->input->post('edit_publisher_name'),
+                'media_type' => $this->input->post('edit_media_type')
             );
-            $this->publisher_model->change_publisher($param, $this->input->post('id'));
+            $this->publisher_model->updatePublisher($update_data);
             
-            $msg = $this->mith_func->build_message('success', $this->lang->line('MESSAGE_EDIT_SUCCESS'));	         
+            $data['message_sys'] = $this->lang->line('MESSAGE_EDIT_SUCCESS');
+            $data['class'] = 'success';            
+        }else{
+            # error management
+            $data['error'] = $this->error;
         }
-		
-		$this->session->set_flashdata('msg', $msg);
-		
-		redirect('backend/publisher');
-	}
+        
+        $this->session->set_flashdata('parsing_data', $data);
+        redirect('backend/publisher'); 
+    }
 	
 	public function delete() {
+        $data['message_sys'] = $this->lang->line('MESSAGE_DELETE_FAILED');
+        $data['class'] = 'danger';
+
+        if ($this->input->post('deleted_id') != '') {
+            $id = $this->input->post('deleted_id');
+            
+            $o = $this->publisher_model->getPublisher($id);
+            if ($o) {
+                $this->publisher_model->deletePublisher($id);
+                
+                $data['message_sys'] = $this->lang->line('MESSAGE_DELETE_SUCCESS');
+                $data['class'] = 'success';
+            } else {
+                $data['message_sys'] = "";
+            }
+        } else {
+            $data['message_sys'] = "";
+        }
+
+        $this->session->set_flashdata('parsing_data', $data);
+        redirect('backend/publisher');
+    }
 	
-		if($this->publisher_model->delete_publisher($this->input->post("id"))) {
-			$msg = $this->mith_func->build_message('success', $this->lang->line('MESSAGE_DELETE_SUCCESS'));
-		}else {
-			$msg = $this->mith_func->build_message('success', $this->lang->line('MESSAGE_DELETE_FAILED'));
-		}
-			
-		$this->session->set_flashdata('msg', $msg);
-		redirect('backend/publisher');
-	}
-	
-	protected function validate($edit="") {
-		$id = "";
+	 protected function validate($edit="") {
+        $id = "";
         if($edit != "") $id = $this->input->post($edit.'id');
         
-        // if (strlen($this->input->post($edit.'topic_name')) < 3) {
-            // $this->error['topic_name'] = 'Topic Name must be at least 3 characters in length.';
+        // if (strlen($this->input->post($edit.'publisher_name')) < 3) {
+            // $this->error['publisher_name'] = 'Topic Name must be at least 3 characters in length.';
         // }
         
-        // if($this->topic_model->isDuplicate($this->input->post($edit.'topic_name'))){
+        // if($this->publisher_model->isDuplicate($this->input->post($edit.'publisher_name'))){
             // $this->error['duplicate'] = 'Data already exist.';
         // }
         
         if (!$this->error) return true;
         else return false;
-	}
+    }
+	
 }
 
 ?>
