@@ -10,9 +10,9 @@ class frontpage extends Main_Controller {
     }
 
    public function index() {
-   		if (!$this->tank_auth->is_logged_in()) {
-            redirect('/auth/login/');
-        }
+		// if (!$this->tank_auth->is_logged_in()) {
+		// 	redirect('/auth/login/');
+		// }
         
         $newsToday = $this->solr_model->getDashboardData();        
         
