@@ -52,7 +52,7 @@
 							<td><?php echo ++$no; ?></td>
 							<td><?php echo $obj->publisher_name; ?></td>
 							<td><?php echo $this->mith_func->getMediaTypeList()[$obj->media_type]; ?></td>
-							<td><?php echo $this->mith_func->time_elapsed_string($obj->created); ?></td>									
+							<td class="text-right"><?php echo $this->mith_func->time_elapsed_string($obj->created); ?></td>									
 							<td class="text-left">
 								<div class="btn-group">
 									<button type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown">

@@ -56,7 +56,7 @@
 									<td><?php echo $u->name; ?></td>
 									<td><?php echo $u->username; ?></td>
 									<td><?php echo $u->email; ?></td>
-									<td><?php echo $this->mith_func->time_elapsed_string($u->last_login); ?></td>
+									<td class="text-right"><?php echo $this->mith_func->time_elapsed_string($u->last_login); ?></td>
 									<td class="text-left">
 										<div class="btn-group">
 											<button type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown">
