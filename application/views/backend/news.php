@@ -12,7 +12,6 @@
             <ol class="breadcrumb default square rsaquo sm">
                 <li><a href="/backend/dashboard"><i class="fa fa-home"></i></a></li>
                 <li>Data Management</li>
-                <li><a href="/backend/publisher">Publisher</a></li>
                 <li class="active"><?php echo $page_title; ?></li>
             </ol>
             <!-- End breadcrumb -->
@@ -35,13 +34,14 @@
                 <?php } ?>
                 <!-- END MESSAGE -->
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover" id="datatable-programs">
+                    <table class="table table-striped table-hover" id="datatable-newss">
                         <thead class="the-box dark full">
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
-                                <th>Publisher</th>
-                                <th>Created</th>
+                                <th>News Title</th>
+                                <th>Publish Date</th>
+                                <th>Program</th>
+                                <th>Publisher</th>                                
                                 <th class="text-center">Action</th>                                
                             </tr>
                         </thead>
@@ -52,6 +52,8 @@
                                 ?>
                                 <tr class="gradeA">
                                     <td><?php echo ++$no; ?></td>
+                                    <td><?php echo ucwords($obj->news_title); ?></td>
+                                    <td><?php echo ucwords($obj->news_date); ?></td>
                                     <td><?php echo ucwords($obj->program_name); ?></td>
                                     <td><?php echo ucwords($obj->publisher_name); ?></td>
                                     <td class="text-right"><?php echo $this->mith_func->time_elapsed_string($obj->created); ?></td>
@@ -63,13 +65,13 @@
                                             <ul class="dropdown-menu pull-right" role="menu">												
                                                 <li>
                                                     <a data-target="#edit" role="button" data-toggle="modal" title="Edit Data"
-                                                       id="edit_<?php echo $obj->program_id; ?>"
-                                                       name="edit_<?php echo $obj->program_id; ?>" href="">
+                                                       id="edit_<?php echo $obj->news_id; ?>"
+                                                       name="edit_<?php echo $obj->news_id; ?>" href="">
                                                         Edit Data</a>
                                                 </li>
                                                 <li>
                                                     <a data-target="#delete" role="button" data-toggle="modal" title="Delete Data"
-                                                       onclick="$('input[name=deleted_id]').val(<?php echo $obj->program_id; ?>)"
+                                                       onclick="$('input[name=deleted_id]').val(<?php echo $obj->news_id; ?>)"
                                                        href="">
                                                         Delete Data</a>
                                                 </li>
@@ -96,7 +98,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#datatable-programs').dataTable({
+        $('#datatable-newss').dataTable({
             "columns": [
                 null,
                 null,
@@ -105,128 +107,16 @@
             ]
         });
         
-        $("#form_add").validate({
-            rules: {
-                publisher_id: {
-                    required: true
-                },
-                program_name: {
-                    required: true,
-                    minlength: 3,
-                    maxlength: 100
-                }
-            },
-            messages: {
-                publisher_id: {
-                    required: "Please select data."
-                },
-                program_name: {
-                    required: "Please enter a valid name.",
-                    minlength: "Name must be at least 3 characters in length.",
-                    maxlength: "Name must be less than 100 characters in length."
-                }
-            }
-        });
-        
-        $("#form_edit").validate({
-            rules: {
-                edit_publisher_id: {
-                    required: true
-                },
-                edit_program_name: {
-                    required: true,
-                    minlength: 3,
-                    maxlength: 100
-                }
-            },
-            messages: {
-                edit_publisher_id: {
-                    required: "Please select data."
-                },
-                edit_program_name: {
-                    required: "Please enter a valid name.",
-                    minlength: "Name must be at least 3 characters in length.",
-                    maxlength: "Name must be less than 100 characters in length."
-                }
-            }
-        });
-        
         $(".tooltip-examples button").tooltip();
         window.setTimeout(function () {
             $(".alert").alert('close');
         }, <?php echo $this->config->item('timeout_message'); ?>);
-
-        <?php foreach ($objList as $obj) { ?>
-            $("#edit_<?php echo $obj->program_id; ?>").click(function () {
-                $('input[name=edit_program_id]').val('<?php echo $obj->program_id; ?>');
-                $('input[name=edit_program_name]').val('<?php echo $obj->program_name; ?>');
-                $('#edit_publisher_id option:contains(<?php echo $obj->publisher_name; ?>):first').prop('selected', true);            
-            });
-        <?php } ?>
     });
 </script>
 
-<!-- Modal -->
-<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <form role="form" action="<?php echo base_url('backend/program/add') ?>" method="post" id="form_add">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Add New Program</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label>Select Publisher</label>
-                        <?php 
-                            echo form_dropdown('publisher_id', $publisherList, 0, 'id="publisher_id" class="form-control" style="width: 250px;"'); 
-                        ?>
-                    </div>
-                    <div class="form-group">
-                        <label>Program name</label>
-                        <input type="text" id="program_name" name="program_name" class="form-control has-feedback" autofocus />
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" name="register" class="btn btn-primary">Save Data</button>
-                </div>            
-            </div>
-        </form>
-    </div>
-</div>
-<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <form role="form" action="<?php echo base_url('backend/program/edit'); ?>" method="post" id="form_edit">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Edit Program</h4>
-                </div>
-                <div class="modal-body">                                
-                    <div class="form-group">
-                        <label>Select Publisher</label>
-                        <?php 
-                            echo form_dropdown('edit_publisher_id', $publisherList, 0, 'id="edit_publisher_id" class="form-control" style="width: 250px;"'); 
-                        ?>
-                    </div>                            
-                    <div class="form-group">
-                        <label>Program name</label>
-                        <input type="text" id="edit_program_name" name="edit_program_name" class="form-control has-feedback" autofocus />
-                        <input type="hidden" name="edit_program_id" value="">
-                    </div>                    
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
-                    <button class="btn btn-primary">Save data</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </form>
-    </div><!-- /.modal-dialog -->
-</div>
 <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form role="form" action="<?php echo base_url('backend/program/delete'); ?>" method="post" id="form_delete">
+        <form role="form" action="<?php echo base_url('backend/news/delete'); ?>" method="post" id="form_delete">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

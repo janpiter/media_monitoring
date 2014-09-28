@@ -3,14 +3,14 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class topic extends CI_Controller {
+class news extends CI_Controller {
     
     private $error = array();
     
     function __construct() {
         parent::__construct();
         
-        $this->load->model('topic_model', '', TRUE);
+        $this->load->model('news_model', '', TRUE);
 
         $this->load->library('tank_auth_groups', '', 'tank_auth');
         $this->lang->load('tank_auth');
@@ -47,15 +47,15 @@ class topic extends CI_Controller {
          
         $data = $this->session->flashdata('parsing_data');
 
-        $data['objList'] = $this->topic_model->getList(array('flag' => 0));
-        $data['content_view'] = "backend/topics.php";
-        $data['page_title'] = "Topics";
-        $data['page_desc'] = "manage the entire topics data";
+        $data['objList'] = $this->news_model->getList(array('news.flag' => 0));
+        $data['content_view'] = "backend/news.php";
+        $data['page_title'] = "News";
+        $data['page_desc'] = "manage the entire news data";
         
         if(!key_exists("error", $data)) $data['error'] = array();
         
         $this->load->view('include/header_backend');
-        $this->load->view('backend/topics', $data);
+        $this->load->view('backend/news', $data);
         $this->load->view('include/footer_backend');
     }
     
@@ -65,24 +65,25 @@ class topic extends CI_Controller {
         
         if ($this->validate()) {
             $insert_data = array(
-                'topic_name' => $this->input->post('topic_name'),
+                'news_name' => $this->input->post('news_name'),
+                'publisher_id' => $this->input->post('publisher_id'),
                 'user_id' => $this->tank_auth->get_user_id()
             );
 
-            $id = $this->topic_model->insertTopic($insert_data);
+            $id = $this->news_model->insertNews($insert_data);
 
             $data['message_sys'] = $this->lang->line('MESSAGE_INSERT_SUCCESS');
             $data['class'] = 'success';
 
             $this->session->set_flashdata('parsing_data', $data);
-            redirect('backend/topic');
+            redirect('backend/news');
         } else {
             # error management
             $data['error'] = $this->error;
         }
         
         $this->session->set_flashdata('parsing_data', $data);
-        redirect('backend/topic');        
+        redirect('backend/news');        
     }
 
     public function edit() {
@@ -91,10 +92,11 @@ class topic extends CI_Controller {
         
         if (($this->input->server('REQUEST_METHOD') == 'POST') && $this->validate("edit_")) {
             $update_data = array(
-                'topic_id' => $this->input->post('edit_topic_id'),
-                'topic_name' => $this->input->post('edit_topic_name')
+                'news_id' => $this->input->post('edit_news_id'),
+                'publisher_id' => $this->input->post('edit_publisher_id'),
+                'news_name' => $this->input->post('edit_news_name')
             );
-            $this->topic_model->updateTopic($update_data);
+            $this->news_model->updateNews($update_data);
             
             $data['message_sys'] = $this->lang->line('MESSAGE_EDIT_SUCCESS');
             $data['class'] = 'success';            
@@ -104,7 +106,7 @@ class topic extends CI_Controller {
         }
         
         $this->session->set_flashdata('parsing_data', $data);
-        redirect('backend/topic'); 
+        redirect('backend/news'); 
     }
 
     public function delete() {
@@ -114,9 +116,9 @@ class topic extends CI_Controller {
         if ($this->input->post('deleted_id') != '') {
             $id = $this->input->post('deleted_id');
             
-            $o = $this->topic_model->getTopic($id);
+            $o = $this->news_model->getNews($id);
             if ($o) {
-                $this->topic_model->deleteTopic($id);
+                $this->news_model->deleteNews($id);
                 
                 $data['message_sys'] = $this->lang->line('MESSAGE_DELETE_SUCCESS');
                 $data['class'] = 'success';
@@ -128,18 +130,23 @@ class topic extends CI_Controller {
         }
 
         $this->session->set_flashdata('parsing_data', $data);
-        redirect('backend/topic');
+        redirect('backend/news');
     }
     
     protected function validate($edit="") {
         $id = "";
         if($edit != "") $id = $this->input->post($edit.'id');
         
-        if (strlen($this->input->post($edit.'topic_name')) < 1) {
-            $this->error['topic_name'] = 'Topic Name must be at least 1 characters in length.';
+        if (strlen($this->input->post($edit.'news_name')) < 3) {
+            $this->error['news_name'] = 'News Name must be at least 3 characters in length.';
         }
         
-        if($this->topic_model->isDuplicate($this->input->post($edit.'topic_name'))){
+        $check_data = array(
+            'news_name' => $this->input->post($edit.'news_name'),
+            'publisher_id' => $this->input->post($edit.'publisher_id')
+        ); 
+        
+        if($this->news_model->isDuplicate($check_data)){
             $this->error['duplicate'] = 'Data already exist.';
         }
         
