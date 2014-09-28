@@ -69,6 +69,9 @@
 		<script src="<?php echo base_url('assets/js/apps.js') ?>"></script>
 		<script src="<?php echo base_url('assets/js/demo-panel.js') ?>"></script>
 		
+                <!-- jQuery Validation -->        
+                <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.js'); ?>"></script>
+        
 	</body>
 
 <!-- Mirrored from diliat.in/themeforest/sentir/1.2/index.html by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 23 Sep 2014 02:59:51 GMT -->

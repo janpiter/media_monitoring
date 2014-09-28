@@ -171,3 +171,14 @@
     width: 40px;
     margin-right: 10px;
 }
+
+.error {
+    color: red;
+    display: block;
+    font-family: "LubalinGraph",sans-serif;
+    font-size: 12px;
+    font-style: italic;
+    letter-spacing: 0.5px;
+    padding: 4px 0 2px 5px;
+    text-transform: none;    
+}

@@ -1,4 +1,4 @@
-<div class="wrapper">
+ <div class="wrapper">
     <?php $this->load->view('backend/top-nav'); ?>
     <?php $this->load->view('backend/nav'); ?>
 
@@ -100,6 +100,40 @@
                 null,                
                 {"orderable": false}
             ]
+        });
+        
+        $("#form_add").validate({
+            rules: {
+                topic_name: {
+                    required: true,
+                    minlength: 1,
+                    maxlength: 100
+                }
+            },
+            messages: {
+                topic_name: {
+                    required: "Please enter a valid name.",
+                    minlength: "Name must be at least 1 characters in length.",
+                    maxlength: "Name must be less than 100 characters in length."
+                }
+            }
+        });
+        
+        $("#form_edit").validate({
+            rules: {
+                edit_topic_name: {
+                    required: true,
+                    minlength: 1,
+                    maxlength: 100
+                }
+            },
+            messages: {
+                edit_topic_name: {
+                    required: "Please enter a valid name.",
+                    minlength: "Name must be at least 1 characters in length.",
+                    maxlength: "Name must be less than 100 characters in length."
+                }
+            }
         });
         
         $(".tooltip-examples button").tooltip();

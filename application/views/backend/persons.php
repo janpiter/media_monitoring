@@ -105,6 +105,40 @@
             ]
         });
         
+        $("#form_add").validate({
+            rules: {
+                person_name: {
+                    required: true,
+                    minlength: 1,
+                    maxlength: 100
+                }
+            },
+            messages: {
+                person_name: {
+                    required: "Please enter a valid name.",
+                    minlength: "Name must be at least 3 characters in length.",
+                    maxlength: "Name must be less than 100 characters in length."
+                }
+            }
+        });
+        
+        $("#form_edit").validate({
+            rules: {
+                edit_person_name: {
+                    required: true,
+                    minlength: 1,
+                    maxlength: 100
+                }
+            },
+            messages: {
+                edit_person_name: {
+                    required: "Please enter a valid name.",
+                    minlength: "Name must be at least 3 characters in length.",
+                    maxlength: "Name must be less than 100 characters in length."
+                }
+            }
+        });
+        
         $(".tooltip-examples button").tooltip();
         window.setTimeout(function () {
             $(".alert").alert('close');
