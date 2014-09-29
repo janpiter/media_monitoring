@@ -22,8 +22,11 @@ class logging_model extends CI_Model {
             $name = (array) $name;
             $keys = array_keys($name);
             foreach ($keys as $key) {
-                if (preg_match('/(^|_)name$/', $key) == 1) {
-                    $name = '<strong>'.$name[$key].'</strong>';
+                $result_name = NULL;
+                if (preg_match('/(^|_|.+)name$/', $key) == 1) {
+                    if (isset($name[$key])) {
+                        $name = '<strong>'.$name[$key].'</strong>';
+                    }
                 }
             }
         }

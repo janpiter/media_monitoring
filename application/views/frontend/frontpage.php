@@ -18,16 +18,12 @@
                         <?php
                         $no = 0;
                         foreach ($data_news as $news) {
-                            if ($no == 0) {
-                                $active = 'class="item active"';
-                            } else {
-                                $active = 'class="item"';
-                            }
-                        ?>
-                            <div <?php echo $active; ?>>
+                        	$active = ($no == 0) ? ' active' : '';
+                        	?>
+                            <div class="item<?php echo $active; ?>">
                                 <img src="<?php echo $news->url; ?>" alt="Image slide" onerror="this.onerror=null;this.src='<?php echo ""; ?>';" style="max-height: 395px;min-height: 395px">
-                                <div class="carousel-caption dark-bg" style="max-height: 395px;min-height: 395px;width:100%">
-                                    <h4 class="text-left" style="padding: 0 10px;"><a href="#fakelink"><?php echo $news->title; ?></a></h4>
+                                <div class="carousel-caption dark-bg" style="max-height: 395px;min-height: 395px;width:100%;padding-top:0">
+                                    <h3 class="text-left" style="padding: 0 10px;"><a href="#fakelink"><?php echo $news->title; ?></a></h3>
                                     <p class="text-muted text-left" style="padding:0 10px;"><small><small>Posted on <?php echo str_replace("+", " ", ucfirst($news->media)); ?>, <?php echo $this->mith_func->time_elapsed_string($news->pubDate, TRUE); ?></small></small></p>
                                     <p class="text-left" style="padding:0 10px;position:absolute;bottom:5px;"><small><?php echo $news->desc; ?></small></p>
                                 </div>

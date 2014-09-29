@@ -12,6 +12,8 @@ class auth extends CI_Controller
 		// $this->load->library('tank_auth');
 		$this->load->library('tank_auth_groups','','tank_auth');
 		$this->lang->load('tank_auth');
+
+		$this->load->model('logging_model');
 	}
 
 	function index()
@@ -72,8 +74,13 @@ class auth extends CI_Controller
 						$this->form_validation->set_value('password'),
 						$this->form_validation->set_value('remember'),
 						$data['login_by_username'],
-						$data['login_by_email'])) {								// success
+						$data['login_by_email'])) {	
+						// $temp = explode(" ", $this->form_validation->set_value('login'));
+						// print_r($this->session->userdata());
+						// exit();
+						// $this->logging_model->insertLog('login', 'users', 0, $this->form_validation->set_value('login'));
 						redirect('/backend/dashboard');
+
 
 				} else {
 					$errors = $this->tank_auth->get_error_message();
@@ -110,6 +117,8 @@ class auth extends CI_Controller
 	 */
 	function logout()
 	{
+		// $this->logging_model->insertLog('logout', 'users', 0, $this->form_validation->set_value('login'));
+
 		$this->tank_auth->logout();
 
 		$this->_show_message($this->lang->line('auth_message_logged_out'));

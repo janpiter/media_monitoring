@@ -52,13 +52,13 @@ class news_model extends CI_Model {
     function updateNews($data) {
         $this->db->where('news_id', $data['news_id']);
         $this->db->update($this->table_name, $data);        
-        $this->log->insertLog('update', $this->table_name, $data['organization_id'], $data);
+        $this->log->insertLog('update', $this->table_name, $data['news_id'], $data);
     }
 
     function deleteNews($news_id) {
         $this->db->where('news_id', $news_id);
         $this->db->delete($this->table_name);
-        $this->log->insertLog('delete', $this->table_name, $topic_id, $data);
+        $this->log->insertLog('delete', $this->table_name, $news_id, $data);
         
         $res = $this->db->_error_number();        
         return $res;

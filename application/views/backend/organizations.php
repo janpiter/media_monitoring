@@ -34,7 +34,7 @@
                 <?php } ?>
                 <!-- END MESSAGE -->
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover" id="datatable-example">
+                    <table class="table table-striped table-hover" id="datatable-organizations">
                         <thead class="the-box dark full">
                             <tr>
                                 <th>#</th>
@@ -93,17 +93,60 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        $('#datatable-organizations').dataTable({
+            "columns": [
+                null,
+                null,
+                null,                
+                {"orderable": false}
+            ]
+        });
+        
+        $("#form_add").validate({
+            rules: {
+                organization_name: {
+                    required: true,
+                    minlength: 1,
+                    maxlength: 100
+                }
+            },
+            messages: {
+                organization_name: {
+                    required: "Please enter a valid name.",
+                    minlength: "Name must be at least 1 characters in length.",
+                    maxlength: "Name must be less than 100 characters in length."
+                }
+            }
+        });
+        
+        $("#form_edit").validate({
+            rules: {
+                edit_organization_name: {
+                    required: true,
+                    minlength: 1,
+                    maxlength: 100
+                }
+            },
+            messages: {
+                edit_organization_name: {
+                    required: "Please enter a valid name.",
+                    minlength: "Name must be at least 1 characters in length.",
+                    maxlength: "Name must be less than 100 characters in length."
+                }
+            }
+        });
+
         $(".tooltip-examples button").tooltip();
         window.setTimeout(function () {
             $(".alert").alert('close');
         }, <?php echo $this->config->item('timeout_message'); ?>);
 
-<?php foreach ($objList as $obj) { ?>
-            $("#edit_<?php echo $obj->organization_id; ?>").click(function () {
-                $('input[name=edit_organization_id]').val('<?php echo $obj->organization_id; ?>');
-                $('input[name=edit_organization_name]').val('<?php echo $obj->organization_name; ?>');
-            });
-<?php } ?>
+        <?php foreach ($objList as $obj) { ?>
+                $("#edit_<?php echo $obj->organization_id; ?>").click(function () {
+                    $('input[name=edit_organization_id]').val('<?php echo $obj->organization_id; ?>');
+                    $('input[name=edit_organization_name]').val('<?php echo $obj->organization_name; ?>');
+                });
+        <?php } ?>
     });
 </script>
 
