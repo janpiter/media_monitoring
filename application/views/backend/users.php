@@ -99,57 +99,124 @@ END PAGE
 -->
 
 <script type="text/javascript">
-    $('.edit-row').click(function (e) {
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            url: '<?php echo base_url('/backend/user/get'); ?>',
-            data: 'id=' + $(this).data('id'),
-            success: function (response) {
-                console.log(response);
-                $('input[id=edit_id]').val(response.id);
-                $('input[name=personname]').val(response.name);
-                $('input[name=username]').val(response.username);
-                $('input[name=email]').val(response.email);
-                $('select[name=user-level]').val(response.group_id);
-
-                $('.password').hide();
-                $('input[name=password]').prop('disabled', true);
-                $('.confirm_password').hide();
-                $('input[name=confirm_password]').prop('disabled', true);
-
-                $('#myModal form').attr('action', '<?php echo base_url('/backend/user/edit') ?>'); //this fails silently
-                $('#myModal form').get(0).setAttribute('action', '<?php echo base_url('/backend/user/edit') ?>'); //this works
-
-                $('#myModal').modal('show');
+	$(document).ready(function () {
+		
+		$("#form_add").validate({
+            rules: {
+                personname: {
+                    required: true,
+					minlength: 3,
+                    maxlength: 100
+                },
+                username: {
+					required: true,
+					minlength: 3,
+                    maxlength: 100
+				},
+				password: {
+					required: true,
+					minlength: 6,
+                    maxlength: 100
+				},
+				confirm_password: {
+					required: true,
+					equalTo: "#password",
+					minlength: 6,
+                    maxlength: 100
+				},
+				email: {
+					required: true,
+					email: true
+				},
+				user_level: {
+					required: true
+				}
+            },
+            messages: {        
+                personname: {
+                    required: "Please enter a valid name.",
+                    minlength: "Name must be at least 3 characters in length.",
+                    maxlength: "Name must be less than 100 characters in length."
+                },
+				username: {
+                    required: "Please enter a valid name.",
+                    minlength: "Name must be at least 3 characters in length.",
+                    maxlength: "Name must be less than 100 characters in length."
+                },
+				password: {
+                    required: "Please enter a valid name.",
+                    minlength: "Name must be at least 6 characters in length.",
+                    maxlength: "Name must be less than 100 characters in length."
+                },
+				confirm_password: {
+                    required: "Please enter a valid name.",
+                    minlength: "Name must be at least 6 characters in length.",
+                    maxlength: "Name must be less than 100 characters in length."
+                },
+				email: {
+					required: "Please enter a valid email address",
+				},
+				user_level: {
+                    required: "Please select data."
+                },
             }
-        })
-    });
-    $('.reset-row').click(function (e) {
+        });
+		
+		$('.edit-row').click(function (e) {
+			$.ajax({
+				type: 'POST',
+				dataType: 'json',
+				url: '<?php echo base_url('/backend/user/get'); ?>',
+				data: 'id=' + $(this).data('id'),
+				success: function (response) {
+					console.log(response);
+					$('input[id=edit_id]').val(response.id);
+					$('input[name=personname]').val(response.name);
+					$('input[name=username]').val(response.username);
+					$('input[name=email]').val(response.email);
+					$('select[name=user_level]').val(response.group_id);
 
-        $('input[id=edit_id]').val($(this).data('id'));
+					$('.password').hide();
+					$('input[name=password]').prop('disabled', true);
+					$('.confirm_password').hide();
+					$('input[name=confirm_password]').prop('disabled', true);
 
-        $('.personname').hide();
-        $('input[name=personname]').prop('disabled', true);
-        $('.username').hide();
-        $('input[name=username]').prop('disabled', true);
-        $('.email').hide();
-        $('input[name=email]').prop('disabled', true);
-        $('.user-level').hide();
-        $('select[name=user-level]').prop('disabled', true);
-        $('.confirm_password').hide();
-        $('input[name=confirm_password]').prop('disabled', true);
+					$('#myModal form').attr('action', '<?php echo base_url('/backend/user/edit') ?>'); //this fails silently
+					$('#myModal form').get(0).setAttribute('action', '<?php echo base_url('/backend/user/edit') ?>'); //this works
 
-        $('#myModal form').attr('action', '<?php echo base_url('/backend/user/force_reset') ?>'); //this fails silently
-        $('#myModal form').get(0).setAttribute('action', '<?php echo base_url('/backend/user/force_reset') ?>'); //this works
+					$('#myModal').modal('show');
+				}
+			})
+		});
+		$('.reset-row').click(function (e) {
 
-        $('#myModal').modal('show');
-    });
+			$('input[id=edit_id]').val($(this).data('id'));
 
-    $('.delete-row').click(function (e) {
-        $('input[id=deleted_id]').val($(this).data('id'));
-        $('#delete').modal('show');
-    });
+			$('.personname').hide();
+			$('input[name=personname]').prop('disabled', true);
+			$('.username').hide();
+			$('input[name=username]').prop('disabled', true);
+			$('.email').hide();
+			$('input[name=email]').prop('disabled', true);
+			$('.user_level').hide();
+			$('select[name=user_level]').prop('disabled', true);
+			$('.confirm_password').hide();
+			$('input[name=confirm_password]').prop('disabled', true);
+
+			$('#myModal form').attr('action', '<?php echo base_url('/backend/user/force_reset') ?>'); //this fails silently
+			$('#myModal form').get(0).setAttribute('action', '<?php echo base_url('/backend/user/force_reset') ?>'); //this works
+
+			$('#myModal').modal('show');
+		});
+
+		$('.delete-row').click(function (e) {
+			$('input[id=deleted_id]').val($(this).data('id'));
+			$('#delete').modal('show');
+		});
+		
+		 window.setTimeout(function () { $(".alert").alert('close'); }, <?php echo $this->config->item('timeout_message'); ?>);
+
+	});
 </script>
 
 
@@ -161,36 +228,36 @@ END PAGE
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title" id="myModalLabel">User Registered</h4>
             </div>
-            <form role="form" action="<?php echo base_url('auth/register') ?>" method="post">
+            <form role="form" action="<?php echo base_url('auth/register') ?>" method="post" id="form_add">
                 <div class="modal-body">																			
                     <div class="form-group personname">
                         <label>Full name</label>
-                        <input type="text" name="personname" class="form-control has-feedback" autofocus required />
+                        <input type="text" name="personname" id="personname" class="form-control has-feedback" autofocus />
                         <!-- <span class="fa fa-male form-control-feedback"></span> -->				
                     </div>
                     <div class="form-group username">
                         <label>Username</label>
-                        <input type="username" name="username" class="form-control has-feedback" required />
+                        <input type="username" name="username" id="username" class="form-control has-feedback" />
                         <!-- <span class="fa fa-user form-control-feedback"></span> -->								
                     </div>
                     <div class="form-group email">
                         <label>Email address</label>
-                        <input type="email" name="email" class="form-control has-feedback" required />
+                        <input type="email" name="email" id="email" class="form-control has-feedback" />
                         <!-- <span class="fa fa-envelope form-control-feedback"></span> -->
                     </div>							
                     <div class="form-group password">
                         <label>Password</label>
-                        <input type="password" name="password" class="form-control has-feedback" required />
+                        <input type="password" name="password" id="password" class="form-control has-feedback" />
                         <!-- <span class="fa fa-lock form-control-feedback"></span> -->
                     </div>
                     <div class="form-group confirm_password">
                         <label>Retype Password</label>
-                        <input type="password" name="confirm_password" class="form-control has-feedback" required />
+                        <input type="password" name="confirm_password" id="confirm_password" class="form-control has-feedback" />
                         <!-- <span class="fa fa-unlock form-control-feedback"></span> -->
                     </div>
-                    <div class="form-group user-level">
+                    <div class="form-group user_level">
                         <label>Permission</label>
-                        <select name="user-level" class="form-control" tabindex="2" required >
+                        <select name="user_level" id="user_level" class="form-control" tabindex="2">
                             <option value="" disabled selected>Choosen Role</option>
                             <option value="1">Super Administrator</option>
                             <option value="2">Administrator</option>
