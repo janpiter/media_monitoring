@@ -104,19 +104,65 @@
                 {"orderable": false}
             ]
         });
+		
+		$("#form_add").validate({
+            rules: {
+                media_type: {
+                    required: true
+                },
+                publisher_name: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 100
+                }
+            },
+            messages: {
+                media_type: {
+                    required: "Please select data."
+                },
+                publisher_name: {
+                    required: "Please enter a valid name.",
+                    minlength: "Name must be at least 3 characters in length.",
+                    maxlength: "Name must be less than 100 characters in length."
+                }
+            }
+        });
+		
+		$("#form_edit").validate({
+            rules: {
+                edit_media_type: {
+                    required: true
+                },
+                edit_publisher_name: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 100
+                }
+            },
+            messages: {
+                edit_media_type: {
+                    required: "Please select data."
+                },
+                edit_publisher_name: {
+                    required: "Please enter a valid name.",
+                    minlength: "Name must be at least 3 characters in length.",
+                    maxlength: "Name must be less than 100 characters in length."
+                }
+            }
+        });
 
         // $(".tooltip-examples button").tooltip();
         window.setTimeout(function () {
             $(".alert").alert('close');
         }, <?php echo $this->config->item('timeout_message'); ?>);
 
-<?php foreach ($objList as $obj) { ?>
+		<?php foreach ($objList as $obj) { ?>
             $("#edit_<?php echo $obj->publisher_id; ?>").click(function () {
                 $('input[name=edit_publisher_id]').val('<?php echo $obj->publisher_id; ?>');
                 $('input[name=edit_publisher_name]').val('<?php echo $obj->publisher_name; ?>');
                 $('select[name=edit_media_type]').val('<?php echo $obj->media_type; ?>');
             });
-<?php } ?>
+		<?php } ?>
     });
 </script>
 
@@ -129,16 +175,16 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title" id="myModalLabel">Publisher Registered</h4>
             </div>
-            <form role="form" action="<?php echo base_url('backend/publisher/add') ?>" method="post">
+            <form role="form" action="<?php echo base_url('backend/publisher/add') ?>" method="post" id="form_add">
                 <div class="modal-body">																			
                     <div class="form-group">
                         <label>Publisher</label>
-                        <input type="text" name="publisher_name" class="form-control has-feedback" autofocus required />
+                        <input type="text" name="publisher_name" id="publisher_name" class="form-control has-feedback" autofocus required />
                         <!-- <span class="fa fa-male form-control-feedback"></span> -->				
                     </div>
                     <div class="form-group">
                         <label>Media Type</label>
-                        <select name="media_type" class="form-control" tabindex="2" required >
+                        <select name="media_type" id="media_type" class="form-control" tabindex="2" required >
                             <option value="" disabled selected>-- Choosen Media Type --</option>
                             <!-- choosen -->
                             <?php
@@ -166,7 +212,7 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title" id="myModalLabel">Publisher Registered</h4>
             </div>
-            <form role="form" action="<?php echo base_url('backend/publisher/edit') ?>" method="post">
+            <form role="form" action="<?php echo base_url('backend/publisher/edit') ?>" method="post" id="form_edit">
                 <div class="modal-body">																			
                     <div class="form-group">
                         <label>Publisher</label>
