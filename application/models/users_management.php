@@ -6,7 +6,11 @@ class Users_management extends CI_Model {
 	private $profile_table_name	= 'user_profiles';	// user profiles
 
 	function __construct() {
-		parent::__construct();		
+		parent::__construct();	
+
+		$CI =& get_instance();
+        $CI->load->model('logging_model');
+        $this->log = $CI->logging_model;	
 	}
 	
 	/**
@@ -49,8 +53,10 @@ class Users_management extends CI_Model {
 	 * @return	bool
 	 */
 	function delete_user($id) {
+		$data = $this->get_user_by_id($id);
 		$this->db->where('id', $id);
 		$this->db->delete($this->table_name);
+		$this->log->insertLog('delete', $this->table_name, $id, $data);
 		if ($this->db->affected_rows() > 0) return TRUE;
 		return FALSE;
 	}
@@ -66,6 +72,7 @@ class Users_management extends CI_Model {
 
 		$this->db->where("id", $id);
 		$this->db->update($this->table_name, $data);
+		$this->log->insertLog('update', $this->table_name, $id, $data);
 		
 		return $this->db->affected_rows() > 0;
 	}

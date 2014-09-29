@@ -47,7 +47,7 @@ class topic_model extends CI_Model {
     function updateTopic($data) {
         $this->db->where('topic_id', $data['topic_id']);
         $this->db->update($this->table_name, $data);        
-        $this->log->insertLog('update', $this->table_name, $data['organization_id'], $data);
+        $this->log->insertLog('update', $this->table_name, $data['topic_id'], $data);
     }
 
     function deleteTopic($topic_id) {

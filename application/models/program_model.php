@@ -50,13 +50,14 @@ class program_model extends CI_Model {
     function updateProgram($data) {
         $this->db->where('program_id', $data['program_id']);
         $this->db->update($this->table_name, $data);        
-        $this->log->insertLog('update', $this->table_name, $data['organization_id'], $data);
+        $this->log->insertLog('update', $this->table_name, $data['program_id'], $data);
     }
 
     function deleteProgram($program_id) {
+        $data = $this->getProgram($program_id);
         $this->db->where('program_id', $program_id);
         $this->db->delete($this->table_name);
-        $this->log->insertLog('delete', $this->table_name, $topic_id, $data);
+        $this->log->insertLog('delete', $this->table_name, $program_id, $data);
         
         $res = $this->db->_error_number();        
         return $res;
