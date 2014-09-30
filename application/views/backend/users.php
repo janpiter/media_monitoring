@@ -257,7 +257,7 @@ END PAGE
                     </div>
                     <div class="form-group user_level">
                         <label>Permission</label>
-                        <select name="user_level" id="user_level" class="form-control" tabindex="2">
+                        <select name="user_level" id="user_level" class="form-control">
                             <option value="" disabled selected>Choosen Role</option>
                             <option value="1">Super Administrator</option>
                             <option value="2">Administrator</option>

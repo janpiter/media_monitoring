@@ -152,7 +152,7 @@ class auth extends CI_Controller
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
 			$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|xss_clean|matches[password]');
 			$this->form_validation->set_rules('personname', 'Personname', 'trim|xss_clean|max_length['.$this->config->item('personname_max_length', 'tank_auth').']');
-			$this->form_validation->set_rules('user-level', 'User-level', 'required');
+			$this->form_validation->set_rules('user_level', 'User Level', 'required');
 
 			$captcha_registration	= $this->config->item('captcha_registration', 'tank_auth');
 			$use_recaptcha			= $this->config->item('use_recaptcha', 'tank_auth');
@@ -176,7 +176,7 @@ class auth extends CI_Controller
 						$this->form_validation->set_value('email'),
 						$this->form_validation->set_value('password'),
 						$this->form_validation->set_value('personname'),
-						$this->form_validation->set_value('user-level'),
+						$this->form_validation->set_value('user_level'),
 						$email_activation))) {									// success
 
 					$data['site_name'] = $this->config->item('website_name', 'tank_auth');
