@@ -24,6 +24,11 @@ class Users extends CI_Model
 		$this->profile_table_name	= $ci->config->item('db_table_prefix', 'tank_auth').$this->profile_table_name;
 	}
 
+	function get_table_name()
+	{
+		return $this->table_name;
+	}
+
 	/**
 	 * Get user record by Id
 	 *

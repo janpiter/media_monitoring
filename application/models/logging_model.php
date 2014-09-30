@@ -5,13 +5,6 @@ class logging_model extends CI_Model {
     private $table_name = 'history';
     private $table_join = 'users';
 
-    function __construct() {
-        parent::__construct();
-
-        $this->load->library('tank_auth_groups', '', 'tank_auth');
-        $this->lang->load('tank_auth');
-    }
-
     private function parsingLog($activity, $detail) {
         $data = explode(';', $detail);
         $table = $data[0];

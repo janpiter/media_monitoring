@@ -30,6 +30,8 @@ class Tank_auth
 		$this->ci->load->database();
 		$this->ci->load->model('tank_auth/users');
 
+		$this->ci->load->model('logging_model');
+
 		// Try to autologin
 		$this->autologin();
 	}
@@ -68,9 +70,6 @@ class Tank_auth
 						$this->error = array('banned' => $user->ban_reason);
 
 					} else {
-						// $user = $this->ci->users->get_user_by_id($this->get_user_id());
-						// $this->ci->session->set_userdata(array('group_id'	=> $user->group_id));
-
 						$this->ci->session->set_userdata(array(
 								'user_id'	=> $user->id,
 								'username'	=> $user->username,
@@ -92,6 +91,13 @@ class Tank_auth
 									$user->id,
 									$this->ci->config->item('login_record_ip', 'tank_auth'),
 									$this->ci->config->item('login_record_time', 'tank_auth'));
+
+							$this->ci->logging_model->insertLog(
+								'login', 
+								$this->ci->users->get_table_name(), 
+								0, 
+								$this->ci->users->$get_user_func($login));
+
 							return TRUE;
 						}
 						
