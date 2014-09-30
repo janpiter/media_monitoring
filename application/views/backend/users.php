@@ -73,12 +73,13 @@ BEGIN PAGE
                                         </div>
                                     </td>									
                                 </tr>
-<?php } ?>
+							<?php } ?>
                         </tbody>
                     </table>
                 </div><!-- /.table-responsive -->
             </div><!-- /.the-box .default -->
             <!-- END DATA TABLE -->
+			
         </div><!-- /.container-fluid -->				
     </div><!-- /.page-content -->
 </div><!-- /.wrapper -->
