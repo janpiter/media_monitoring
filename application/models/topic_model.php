@@ -10,6 +10,9 @@ class topic_model extends CI_Model {
         $CI =& get_instance();
         $CI->load->model('logging_model');
         $this->log = $CI->logging_model;
+
+        $this->load->library('tank_auth_groups', '', 'tank_auth');
+        $this->lang->load('tank_auth');
     }
 
     function getList($where=array(), $start=0, $limit=0) {
